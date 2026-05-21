@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>巡回指導 | かめちゃん運動教室</title>
+  <meta name="description" content="かめちゃん運動教室の巡回指導サービス。保育園・幼稚園・学童へ出向き、200種類以上の運動プログラムで子どもたちの運動好きを育てます。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    /* ===== デザイントークン ===== */
+    :root {
+      --orange:     #FF6B1A;
+      --orange-lt:  #FF8C42;
+      --orange-bg:  #FFF4EC;
+      --navy:       #1A2456;
+      --text:       #1A2456;
+      --text-sub:   #5A6A8A;
+      --border:     #E8EBF4;
+      --white:      #FFFFFF;
+      --bg:         #F7F8FC;
+      --radius-sm:  10px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --shadow-sm:  0 2px 12px rgba(26,36,86,.06);
+      --shadow-md:  0 8px 32px rgba(26,36,86,.12);
+      --transition: .25s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow var(--transition);
+    }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(26,36,86,.08); }
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 24px;
+    }
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: clamp(.85rem, 3.5vw, 1.35rem);
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .header__logo-icon {
+      width: 38px; height: 38px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+    .header__logo-text span { color: var(--orange); }
+
+    .header__nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    @media (max-width: 768px) { .header__nav { display: none; } }
+    .header__nav a {
+      color: var(--text-sub);
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+    .header__nav a:hover { color: var(--orange); }
+
+    /* ---- ドロップダウン ---- */
+    .nav-dropdown-wrap { position: relative; }
+    .nav-dropdown-trigger {
+      display: flex; align-items: center; gap: 4px;
+      cursor: pointer;
+      color: var(--text-sub);
+      font-weight: 700;
+      font-size: .9rem;
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+    .nav-dropdown-trigger:hover { color: var(--orange); }
+    .nav-dropdown-wrap.open .nav-dropdown-trigger { color: var(--orange); }
+    .nav-dropdown-trigger i { font-size: .65rem; transition: transform .2s; }
+    .nav-dropdown-wrap.open .nav-dropdown-trigger i { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      min-width: 160px;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .nav-dropdown-wrap.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 16px;
+      font-size: .875rem; font-weight: 700;
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+    }
+    .nav-dropdown-menu a:hover { background: var(--orange-bg); color: var(--orange); }
+    .nav-dropdown-menu a.active { color: var(--orange); background: var(--orange-bg); }
+    .nav-dropdown-menu a i { width: 14px; color: var(--orange); }
+
+    .header__cta { display: flex; align-items: center; gap: 12px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+      border: none;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+    .btn--orange {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 4px 16px rgba(255,107,26,.35);
+    }
+    .btn--orange:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,26,.45); }
+    .btn--navy {
+      background: var(--navy);
+      color: var(--white);
+      padding: 8px 14px;
+      font-size: .8rem;
+      white-space: nowrap;
+    }
+    .btn--navy:hover {
+      background: #2a3566;
+      transform: translateY(-2px);
+    }
+    .btn--outline {
+      border: 2px solid var(--orange);
+      color: var(--orange);
+      background: transparent;
+    }
+    .btn--outline:hover { background: var(--orange-bg); transform: translateY(-2px); }
+    .btn--white {
+      background: white;
+      color: var(--orange);
+      font-weight: 900;
+    }
+    .btn--white:hover { background: var(--orange-bg); transform: translateY(-2px); }
+
+    /* ---- ハンバーガー ---- */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+    @media (max-width: 768px) { .hamburger { display: flex; } }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ---- モバイルメニュー ---- */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      position: fixed;
+      inset: 64px 0 0 0;
+      background: white;
+      z-index: 800;
+      padding: 20px 24px;
+      overflow-y: auto;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+    }
+    .mobile-menu.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .mobile-menu a {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .mobile-menu a:hover { color: var(--orange); }
+    .mobile-menu .btn--orange {
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #2a3a7a 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 24px 96px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,107,26,.18) 0%, transparent 60%);
+    }
+    .page-hero__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .page-hero__title {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -.01em;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .page-hero__sub {
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      opacity: .8;
+      position: relative;
+    }
+    .page-hero__wave {
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+    }
+    .page-hero__wave svg { display: block; width: 100%; height: 48px; }
+
+    /* ===== セクション共通 ===== */
+    .section { padding: 72px 0; }
+    .section--bg { background: var(--bg); }
+    .section-label {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .section-lead {
+      color: var(--text-sub);
+      max-width: 640px;
+      line-height: 1.8;
+    }
+
+    /* ===== 目次 ===== */
+    .toc {
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      padding: 28px 32px;
+      margin: 48px 0 0;
+    }
+    .toc__title {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .toc__list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .toc__list a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 7px 16px;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .toc__list a:hover {
+      background: var(--orange-bg);
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+    .toc__list a i { font-size: .7rem; color: var(--orange); }
+
+    /* ===== WHATセクション ===== */
+    .what-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .what-wrap { grid-template-columns: 1fr; gap: 32px; } }
+    .what-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      aspect-ratio: 4/3;
+    }
+    .what-img img { width: 100%; height: 100%; object-fit: cover; }
+    .what-body p { color: var(--text-sub); line-height: 1.9; margin-bottom: 16px; }
+    .what-body p:last-child { margin-bottom: 0; }
+    .what-highlight {
+      background: var(--orange-bg);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    /* ===== 強み ===== */
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) { .strengths-grid { grid-template-columns: 1fr; } }
+    .strength-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .strength-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .strength-card__icon {
+      width: 60px; height: 60px;
+      background: var(--orange-bg);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--orange);
+      margin: 0 auto 16px;
+    }
+    .strength-card__title { font-size: 1.05rem; font-weight: 900; margin-bottom: 10px; }
+    .strength-card__body { font-size: .875rem; color: var(--text-sub); line-height: 1.8; }
+
+    /* ===== カリキュラム ===== */
+    .curriculum-intro {
+      color: var(--text-sub);
+      line-height: 1.9;
+      margin-bottom: 32px;
+      max-width: 700px;
+    }
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 640px) { .curriculum-grid { grid-template-columns: 1fr; } }
+    .curriculum-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .curriculum-card__num {
+      min-width: 44px; height: 44px;
+      background: var(--orange);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 1.1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .curriculum-card__title { font-weight: 900; font-size: 1rem; margin-bottom: 6px; }
+    .curriculum-card__body { font-size: .85rem; color: var(--text-sub); line-height: 1.7; }
+
+    /* ===== 料金 ===== */
+    .pricing-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .pricing-wrap { grid-template-columns: 1fr; } }
+    .pricing-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--border);
+      overflow: hidden;
+    }
+    .pricing-card--main { border-color: var(--orange); }
+    .pricing-card__head {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-card--main .pricing-card__head {
+      background: linear-gradient(135deg, var(--orange), var(--orange-lt));
+      border-bottom: none;
+    }
+    .pricing-card__badge {
+      display: inline-block;
+      background: var(--orange-bg);
+      color: var(--orange);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: .75rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .pricing-card--main .pricing-card__badge {
+      background: rgba(255,255,255,.25);
+      color: white;
+    }
+    .pricing-card__name { font-weight: 900; font-size: 1.2rem; margin-bottom: 4px; }
+    .pricing-card--main .pricing-card__name { color: white; }
+    .pricing-card__desc { font-size: .85rem; color: var(--text-sub); }
+    .pricing-card--main .pricing-card__desc { color: rgba(255,255,255,.85); }
+    .pricing-card__body { padding: 28px; }
+    .pricing-card__price {
+      font-size: 2.6rem;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pricing-card__price span { font-size: 1rem; font-weight: 700; color: var(--text-sub); font-family: 'Noto Sans JP', sans-serif; }
+    .pricing-card__note { font-size: .8rem; color: var(--text-sub); margin-bottom: 20px; }
+    .pricing-card__list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .pricing-card__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .875rem;
+    }
+    .pricing-card__list li i { color: var(--orange); margin-top: 3px; flex-shrink: 0; }
+    .pricing-note {
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+    }
+    .pricing-note__title { font-weight: 900; margin-bottom: 12px; }
+    .pricing-note__list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .pricing-note__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: .875rem;
+      color: var(--text-sub);
+    }
+    .pricing-note__list li i { color: var(--orange); margin-top: 3px; flex-shrink: 0; }
+
+    /* ===== 流れ ===== */
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 40px;
+    }
+    .flow-step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      bottom: -20px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--orange), var(--border));
+    }
+    .flow-step__num {
+      min-width: 48px; height: 48px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 1.1rem;
+      font-family: 'Poppins', sans-serif;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(255,107,26,.3);
+    }
+    .flow-step__body {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .flow-step__title { font-weight: 900; font-size: 1rem; margin-bottom: 6px; }
+    .flow-step__desc { font-size: .875rem; color: var(--text-sub); line-height: 1.7; }
+
+    /* ===== サポート ===== */
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 36px;
+    }
+    @media (max-width: 768px) { .support-grid { grid-template-columns: 1fr; } }
+    .support-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .support-card__icon {
+      width: 48px; height: 48px;
+      background: var(--orange-bg);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    .support-card__title { font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
+    .support-card__body { font-size: .875rem; color: var(--text-sub); line-height: 1.7; }
+
+    /* ===== スケジュールボックス ===== */
+    .schedule-box {
+      margin-top: 24px;
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      border-left: 4px solid var(--orange);
+    }
+    .schedule-box__title {
+      font-weight: 900;
+      font-size: .9rem;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+    .schedule-box__title i { margin-right: 6px; }
+    .schedule-example { display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; }
+    .schedule-row { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+    .schedule-badge {
+      background: var(--orange);
+      color: white;
+      font-size: .75rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 100px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .schedule-times { display: flex; flex-wrap: wrap; gap: 8px; }
+    .schedule-times span {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px 12px;
+      font-size: .83rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .schedule-times span em { color: var(--orange); font-style: normal; margin-left: 4px; }
+    .schedule-note { font-size: .82rem; color: var(--text-sub); }
+
+    /* ===== 先生からの声 ===== */
+    .voices-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    @media (max-width: 768px) { .voices-grid { grid-template-columns: 1fr; } }
+    .voice-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 32px 24px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .voice-card__icon {
+      font-size: 2rem;
+      color: var(--orange);
+      opacity: .18;
+      position: absolute;
+      top: 16px;
+      left: 18px;
+    }
+    .voice-card__text {
+      font-size: 1.05rem;
+      font-weight: 900;
+      line-height: 1.6;
+      color: var(--navy);
+      margin-bottom: 20px;
+      padding-top: 16px;
+    }
+    .voice-card__from {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .voice-card__from i { color: var(--orange); }
+
+    /* ===== 出張指導・講演会 ===== */
+    .dispatch-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 40px 0;
+    }
+    @media (max-width: 640px) { .dispatch-photos { grid-template-columns: 1fr; } }
+    .dispatch-photo { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .dispatch-photo img { width: 100%; height: 260px; object-fit: cover; display: block; }
+    .dispatch-photo__cap {
+      background: var(--navy);
+      color: rgba(255,255,255,.85);
+      font-size: .8rem;
+      font-weight: 700;
+      padding: 10px 16px;
+      line-height: 1.4;
+    }
+    .dispatch-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 768px) { .dispatch-grid { grid-template-columns: 1fr; } }
+    .dispatch-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .dispatch-card--main {
+      border-color: var(--orange);
+      border-width: 2px;
+    }
+    .dispatch-card__icon {
+      width: 52px; height: 52px;
+      background: var(--orange-bg);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .dispatch-card__title { font-weight: 900; font-size: 1.1rem; margin-bottom: 10px; }
+    .dispatch-card__desc { font-size: .875rem; color: var(--text-sub); line-height: 1.7; margin-bottom: 18px; }
+    .dispatch-topic-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .dispatch-topic-list li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: .875rem; font-weight: 700;
+    }
+    .dispatch-topic-list li i { color: var(--orange); margin-top: 3px; flex-shrink: 0; }
+    .dispatch-cta {
+      background: var(--orange-bg);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .dispatch-cta p { font-size: .9rem; font-weight: 700; color: var(--navy); }
+    .dispatch-cta p i { color: var(--orange); margin-right: 6px; }
+
+    /* ===== CTA STRIP ===== */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-lt) 100%);
+      padding: 72px 24px;
+      text-align: center;
+      color: white;
+    }
+    .cta-strip__label {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .8;
+      margin-bottom: 12px;
+    }
+    .cta-strip h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900; margin-bottom: 12px; }
+    .cta-strip p { opacity: .88; margin-bottom: 32px; font-size: 1rem; }
+    .cta-strip .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-strip .btn--white { background: white; color: var(--orange); font-weight: 900; }
+    .cta-strip .btn--white:hover { background: var(--orange-bg); transform: translateY(-2px); }
+    .cta-strip .btn--ghost {
+      border: 2px solid rgba(255,255,255,.6);
+      color: white;
+      background: transparent;
+    }
+    .cta-strip .btn--ghost:hover { border-color: white; background: rgba(255,255,255,.1); transform: translateY(-2px); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.65);
+      padding: 56px 0 0;
+    }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+    @media (max-width: 768px) { .footer__top { grid-template-columns: 1fr; } }
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer__logo-icon {
+      width: 36px; height: 36px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1rem;
+    }
+    .footer__logo-text {
+      font-weight: 900; font-size: 1.05rem; color: white;
+    }
+    .footer__logo-text span { color: var(--orange-lt); }
+    .footer__desc { font-size: .85rem; line-height: 1.8; margin-bottom: 20px; }
+    .footer__social { display: flex; gap: 12px; }
+    .footer__social a {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.7);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .footer__social a:hover { background: var(--orange); color: white; }
+    .footer__col-title { font-weight: 900; color: white; font-size: .9rem; margin-bottom: 14px; }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer__links a { font-size: .875rem; transition: color var(--transition); }
+    .footer__links a:hover { color: var(--orange-lt); }
+    .footer__contact-item { display: flex; gap: 10px; margin-bottom: 10px; font-size: .875rem; }
+    .footer__contact-item i { color: var(--orange-lt); margin-top: 2px; }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer__copy { font-size: .8rem; }
+    .footer__copy span { color: var(--orange-lt); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo" aria-label="かめちゃん運動教室">
+          <div class="header__logo-icon"><i class="fa-solid fa-person-running"></i></div>
+          <div class="header__logo-text">かめちゃん<span>運動教室</span></div>
+        </a>
+
+        <nav class="header__nav" aria-label="メインナビゲーション">
+          <div class="nav-dropdown-wrap">
+            <span class="nav-dropdown-trigger">
+              教室について <i class="fa-solid fa-chevron-down"></i>
+            </span>
+            <div class="nav-dropdown-menu">
+              <a href="index.html#about"><i class="fa-solid fa-school"></i> 教室について</a>
+              <a href="coach.html"><i class="fa-solid fa-user"></i> コーチ紹介</a>
+              <a href="blog.html"><i class="fa-solid fa-pen-to-square"></i> ブログ</a>
+            </div>
+          </div>
+          <!-- お仕事依頼 ドロップダウン -->
+          <div class="nav-dropdown-wrap">
+            <span class="nav-dropdown-trigger">
+              お仕事依頼 <i class="fa-solid fa-chevron-down"></i>
+            </span>
+            <div class="nav-dropdown-menu">
+              <a href="patrol.html" class="active"><i class="fa-solid fa-route"></i> 巡回指導</a>
+              <a href="oyako.html"><i class="fa-solid fa-people-group"></i> 親子活動</a>
+              <a href="lecture.html"><i class="fa-solid fa-person-chalkboard"></i> 講演会</a>
+              <a href="pta.html"><i class="fa-solid fa-hands-holding-child"></i> PTA活動</a>
+            </div>
+          </div>
+          <a href="index.html#features">選ばれる理由</a>
+          <a href="index.html#lessons">レッスン</a>
+          <a href="index.html#pricing">料金</a>
+          <a href="index.html#faq">よくある質問</a>
+        </nav>
+
+        <div class="header__cta">
+          <a href="dispatch_reserve.html" class="btn btn--navy">出張指導ご予約</a>
+          <a href="index.html#contact" class="btn btn--orange">無料体験はこちら</a>
+          <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about" onclick="closeMenu()">教室について</a>
+    <a href="coach.html"      onclick="closeMenu()">コーチ紹介</a>
+    <a href="blog.html" onclick="closeMenu()">ブログ</a>
+    <a href="patrol.html"     onclick="closeMenu()">巡回指導</a>
+    <a href="oyako.html"      onclick="closeMenu()">親子活動</a>
+    <a href="lecture.html"    onclick="closeMenu()">講演会</a>
+    <a href="pta.html"        onclick="closeMenu()">PTA活動</a>
+    <a href="index.html#features" onclick="closeMenu()">選ばれる理由</a>
+    <a href="index.html#lessons" onclick="closeMenu()">レッスン</a>
+    <a href="index.html#pricing" onclick="closeMenu()">料金</a>
+    <a href="index.html#faq" onclick="closeMenu()">よくある質問</a>
+    <a href="dispatch_reserve.html" class="btn btn--navy" onclick="closeMenu()">出張指導ご予約</a>
+    <a href="index.html#contact" class="btn btn--orange" onclick="closeMenu()">無料体験はこちら</a>
+  </div>
+
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero__label">
+      <i class="fa-solid fa-route"></i> Patrol
+    </div>
+    <h1 class="page-hero__title">巡回指導</h1>
+    <p class="page-hero__sub">保育園・幼稚園・学童へ出張。子どもたちの「動く楽しさ」をお届けします。</p>
+    <div class="page-hero__wave">
+      <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,24 C360,48 1080,0 1440,24 L1440,48 L0,48 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- 目次 -->
+  <div class="container">
+    <nav class="toc" aria-label="目次">
+      <p class="toc__title"><i class="fa-solid fa-list"></i> &nbsp;目次</p>
+      <ul class="toc__list">
+        <li><a href="#what"><i class="fa-solid fa-chevron-right"></i>巡回指導とは</a></li>
+        <li><a href="#strengths"><i class="fa-solid fa-chevron-right"></i>選ばれる理由</a></li>
+        <li><a href="#voices"><i class="fa-solid fa-chevron-right"></i>先生からの声</a></li>
+        <li><a href="#curriculum"><i class="fa-solid fa-chevron-right"></i>指導内容</a></li>
+        <li><a href="#pricing"><i class="fa-solid fa-chevron-right"></i>料金</a></li>
+        <li><a href="#flow"><i class="fa-solid fa-chevron-right"></i>導入の流れ</a></li>
+        <li><a href="#dispatch"><i class="fa-solid fa-chevron-right"></i>出張指導・講演会</a></li>
+        <li><a href="#support"><i class="fa-solid fa-chevron-right"></i>導入後のサポート</a></li>
+        <li><a href="#contact"><i class="fa-solid fa-chevron-right"></i>お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <!-- 巡回指導とは -->
+  <section class="section" id="what">
+    <div class="container">
+      <div class="what-wrap">
+        <div class="what-img">
+          <img src="images/new3.jpg" alt="子どもたちへの巡回指導の様子" />
+        </div>
+        <div class="what-body">
+          <p class="section-label">What is Patrol?</p>
+          <h2 class="section-title">巡回指導とは</h2>
+          <p>保育園・幼稚園・学童・小学校などの施設に直接出向き、子どもたちに専門的な運動指導を提供するサービスです。</p>
+          <div class="what-highlight">
+            体育館や運動場がなくても大丈夫！<br>
+            少スペースでも実施できる200種類以上のプログラムを用意しています。
+          </div>
+          <p>「運動が苦手な子にも楽しんでほしい」という想いから、勝ち負けよりも"動く楽しさ"を大切にした指導を心がけています。発達障がいへの専門資格も保持しているため、どんな個性を持つ子にも対応できます。</p>
+
+          <!-- スケジュール例 -->
+          <div class="schedule-box">
+            <p class="schedule-box__title"><i class="fa-solid fa-clock"></i> スケジュール例（保育園）</p>
+            <div class="schedule-example">
+              <div class="schedule-row">
+                <span class="schedule-badge">例①</span>
+                <div class="schedule-times">
+                  <span>10:00〜10:30 <em>年少</em></span>
+                  <span>10:30〜11:00 <em>年中</em></span>
+                  <span>11:00〜11:30 <em>年長</em></span>
+                </div>
+              </div>
+              <div class="schedule-row">
+                <span class="schedule-badge">例②</span>
+                <div class="schedule-times">
+                  <span>9:30〜10:15 <em>年中</em></span>
+                  <span>10:15〜11:00 <em>年長</em></span>
+                </div>
+              </div>
+            </div>
+            <p class="schedule-note">各保育園のご要望に合わせて、時間帯・クラス構成を柔軟に調整します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 選ばれる理由 -->
+  <section class="section section--bg" id="strengths">
+    <div class="container">
+      <p class="section-label">Why Choose Us</p>
+      <h2 class="section-title">かめちゃん先生が選ばれる理由</h2>
+      <p class="section-lead">現場の先生からも「子どもたちが目を輝かせる」と好評をいただいています。</p>
+
+      <div class="strengths-grid">
+        <div class="strength-card">
+          <div class="strength-card__icon"><i class="fa-solid fa-gamepad"></i></div>
+          <p class="strength-card__title">200種類以上のプログラム</p>
+          <p class="strength-card__body">ラダー・体幹・俊敏性・運動遊びなど、子どもが飽きずに楽しめる豊富なメニューをご用意。毎回新鮮な内容で指導します。</p>
+        </div>
+        <div class="strength-card">
+          <div class="strength-card__icon"><i class="fa-solid fa-heart"></i></div>
+          <p class="strength-card__title">苦手な子もみんな大歓迎</p>
+          <p class="strength-card__body">「運動が嫌い」「できない」という子ほど、変化が大きいです。勝ち負けでなく"楽しさ"を中心に置いた指導で、苦手意識を取り除きます。</p>
+        </div>
+        <div class="strength-card">
+          <div class="strength-card__icon"><i class="fa-solid fa-certificate"></i></div>
+          <p class="strength-card__title">発達障がいへの専門資格</p>
+          <p class="strength-card__body">発達障がい支援の専門資格を保持。どんな個性の子にも個別に対応し、その子のペースで成長を引き出す指導を行います。</p>
+        </div>
+        <div class="strength-card">
+          <div class="strength-card__icon"><i class="fa-solid fa-map-location-dot"></i></div>
+          <p class="strength-card__title">富山県内どこでも出張</p>
+          <p class="strength-card__body">富山市・高岡市・射水市・南砺市など、富山県内であれば幅広く対応可能。まずはお気軽にご相談ください。</p>
+        </div>
+        <div class="strength-card">
+          <div class="strength-card__icon"><i class="fa-solid fa-chalkboard-teacher"></i></div>
+          <p class="strength-card__title">先生方との連携を大切に</p>
+          <p class="strength-card__body">担任の先生と情報を共有しながら、クラスの状況に合わせた指導を実施。先生研修や保護者向け説明にも対応します。</p>
+        </div>
+        <div class="strength-card">
+          <div class="strength-card__icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <p class="strength-card__title">安全第一の丁寧な指導</p>
+          <p class="strength-card__body">怪我のリスクを最小限に抑えたプログラム設計。ウォームアップからクールダウンまで、子どもの安全を最優先に考えた指導を徹底します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 先生からの声 -->
+  <section class="section" id="voices">
+    <div class="container">
+      <p class="section-label">Teacher's Voice</p>
+      <h2 class="section-title">先生からの声</h2>
+      <p class="section-lead">現場の先生方からよくいただく言葉です。</p>
+
+      <div class="voices-grid">
+        <div class="voice-card">
+          <div class="voice-card__icon"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="voice-card__text">あの子がこんなに参加したの<br>初めて見た！</p>
+          <div class="voice-card__from">
+            <i class="fa-solid fa-school"></i> 保育園の先生より
+          </div>
+        </div>
+        <div class="voice-card">
+          <div class="voice-card__icon"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="voice-card__text">いつもはなかなか参加できない<br>んです…すごい！</p>
+          <div class="voice-card__from">
+            <i class="fa-solid fa-school"></i> 保育園の先生より
+          </div>
+        </div>
+        <div class="voice-card">
+          <div class="voice-card__icon"><i class="fa-solid fa-quote-left"></i></div>
+          <p class="voice-card__text">声がけの仕方や運動遊びが<br>すごく参考になります！</p>
+          <div class="voice-card__from">
+            <i class="fa-solid fa-school"></i> 保育士の先生より
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 指導内容 -->
+  <section class="section" id="curriculum">
+    <div class="container">
+      <p class="section-label">Curriculum</p>
+      <h2 class="section-title">指導内容</h2>
+      <p class="curriculum-intro">年齢・発達段階に合わせてプログラムをカスタマイズします。下記はよく実施されるカリキュラムの一例です。</p>
+
+      <div class="curriculum-grid">
+        <div class="curriculum-card">
+          <div class="curriculum-card__num">01</div>
+          <div>
+            <p class="curriculum-card__title">運動遊び・サーキット</p>
+            <p class="curriculum-card__body">ケンケン・クマ歩き・カエルジャンプなど、遊びの要素を取り入れた全身運動。子どもが夢中になりながら体の基礎を育てます。</p>
+          </div>
+        </div>
+        <div class="curriculum-card">
+          <div class="curriculum-card__num">02</div>
+          <div>
+            <p class="curriculum-card__title">ラダー・コーディネーション</p>
+            <p class="curriculum-card__body">ラダーや目印を使ったステップ練習で、神経系の発達を促進。俊敏性・リズム感・空間認識能力を楽しく鍛えます。</p>
+          </div>
+        </div>
+        <div class="curriculum-card">
+          <div class="curriculum-card__num">03</div>
+          <div>
+            <p class="curriculum-card__title">体幹・バランストレーニング</p>
+            <p class="curriculum-card__body">片足立ちやバランスボード、体幹遊びを通じて姿勢づくりの土台を形成。転倒予防にもつながる安定した体を育てます。</p>
+          </div>
+        </div>
+        <div class="curriculum-card">
+          <div class="curriculum-card__num">04</div>
+          <div>
+            <p class="curriculum-card__title">ボール・道具を使った運動</p>
+            <p class="curriculum-card__body">ボール投げ・蹴り・キャッチなど、道具を扱う動作で手と目の協調性を育てます。チームで楽しめるゲーム形式も人気です。</p>
+          </div>
+        </div>
+        <div class="curriculum-card">
+          <div class="curriculum-card__num">05</div>
+          <div>
+            <p class="curriculum-card__title">俊敏性・かけっこ強化</p>
+            <p class="curriculum-card__body">スタートダッシュ・方向転換・鬼ごっこ発展系など、素早く動く力を育てるメニュー。運動会シーズンに合わせた特別プログラムも対応可能です。</p>
+          </div>
+        </div>
+        <div class="curriculum-card">
+          <div class="curriculum-card__num">06</div>
+          <div>
+            <p class="curriculum-card__title">リズム・表現運動</p>
+            <p class="curriculum-card__body">音楽に合わせて体を動かすリズム遊びや、感情・想像力を引き出す表現運動。内向きな子も自然と体を動かし始めます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 料金 -->
+  <section class="section section--bg" id="pricing">
+    <div class="container">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title">料金</h2>
+      <p class="section-lead" style="margin-bottom:36px;">施設の規模・頻度・内容に応じてご提案します。まずはお気軽にご相談ください。</p>
+
+      <div class="pricing-wrap">
+        <div>
+          <div class="pricing-card pricing-card--main">
+            <div class="pricing-card__head">
+              <p class="pricing-card__badge">スタンダード</p>
+              <p class="pricing-card__name">巡回指導プラン</p>
+              <p class="pricing-card__desc">保育園・幼稚園・学童への定期巡回</p>
+            </div>
+            <div class="pricing-card__body">
+              <p class="pricing-card__price">要相談<span style="font-size:.85rem;margin-left:4px;">/ 回</span></p>
+              <p class="pricing-card__note">※ 施設の規模・頻度・内容により変動します</p>
+              <ul class="pricing-card__list">
+                <li><i class="fa-solid fa-check"></i>1回あたり40〜60分の指導</li>
+                <li><i class="fa-solid fa-check"></i>週1回〜月1回など柔軟に対応</li>
+                <li><i class="fa-solid fa-check"></i>交通費は別途（要相談）</li>
+                <li><i class="fa-solid fa-check"></i>年間カリキュラム作成付き</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="pricing-note">
+          <p class="pricing-note__title"><i class="fa-solid fa-circle-info" style="color:var(--orange);margin-right:6px;"></i>料金に含まれるもの</p>
+          <ul class="pricing-note__list">
+            <li><i class="fa-solid fa-circle-check"></i>指導計画・カリキュラム作成</li>
+            <li><i class="fa-solid fa-circle-check"></i>毎回の指導レポート提供</li>
+            <li><i class="fa-solid fa-circle-check"></i>初回の無料体験指導</li>
+            <li><i class="fa-solid fa-circle-check"></i>先生向けブリーフィング</li>
+          </ul>
+          <br>
+          <p class="pricing-note__title"><i class="fa-solid fa-circle-info" style="color:var(--orange);margin-right:6px;"></i>こんな施設が導入しています</p>
+          <ul class="pricing-note__list">
+            <li><i class="fa-solid fa-building"></i>保育園・幼稚園</li>
+            <li><i class="fa-solid fa-building"></i>学童保育・児童館</li>
+            <li><i class="fa-solid fa-building"></i>小学校（行政連携含む）</li>
+            <li><i class="fa-solid fa-building"></i>放課後等デイサービス</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 導入の流れ -->
+  <section class="section" id="flow">
+    <div class="container">
+      <p class="section-label">How to Start</p>
+      <h2 class="section-title">導入までの流れ</h2>
+      <p class="section-lead" style="margin-bottom:0;">最短2週間で開始できます。まずはお気軽にご連絡ください！</p>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step__num">01</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">お問い合わせ</p>
+            <p class="flow-step__desc">LINEまたはメールにてご連絡ください。「巡回指導について聞きたい」とだけ送っていただければOKです。24時間以内に返信いたします。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step__num">02</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">施設への訪問・ヒアリング</p>
+            <p class="flow-step__desc">実際に施設に伺い、子どもたちの様子・環境・先生のご要望などをヒアリングします。無料で対応いたします。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step__num">03</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">無料体験指導</p>
+            <p class="flow-step__desc">実際に子どもたちへ1回無料で指導を行います。子どもたちの反応や先生のご感想を確認していただいた上でご検討ください。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step__num">04</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">カリキュラム作成・契約</p>
+            <p class="flow-step__desc">施設の状況・子どもたちの年齢・ご要望に合わせた年間カリキュラムを作成します。内容・料金・頻度を確認の上、契約を締結します。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step__num">05</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">指導開始！</p>
+            <p class="flow-step__desc">いよいよ定期指導がスタート。毎回の指導後にレポートをお渡しし、子どもたちの成長を先生・保護者の方と共有します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 出張指導・講演会 -->
+  <section class="section" id="dispatch">
+    <div class="container">
+      <p class="section-label">Dispatch</p>
+      <h2 class="section-title">出張指導・講演会</h2>
+      <p class="section-lead">保育園・学校への巡回指導だけでなく、出張指導や講演会の講師としても活動しています。PTAや研修会のご依頼もお気軽にご相談ください。</p>
+
+      <div class="dispatch-photos">
+        <div class="dispatch-photo">
+          <img src="images/lecture_podium.jpg" alt="講演会の様子" />
+          <p class="dispatch-photo__cap">発達障がいを持つ子への関わりと運動療育 ―講演会―</p>
+        </div>
+        <div class="dispatch-photo">
+          <img src="images/lecture_floor.jpg" alt="実践指導の様子" />
+          <p class="dispatch-photo__cap">先生たちと一緒に！実践型の運動遊び講座</p>
+        </div>
+      </div>
+
+      <div class="dispatch-grid">
+        <div class="dispatch-card dispatch-card--main">
+          <div class="dispatch-card__icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+          <p class="dispatch-card__title">講演会の講師</p>
+          <p class="dispatch-card__desc">保育園・幼稚園・学校・研修会など、様々な場で講演活動を行っています。以下の内容に対応しています。</p>
+          <ul class="dispatch-topic-list">
+            <li><i class="fa-solid fa-check-circle"></i>発達障がいを持つ子への関わり方・声がけ</li>
+            <li><i class="fa-solid fa-check-circle"></i>運動療育とは？その重要性</li>
+            <li><i class="fa-solid fa-check-circle"></i>保育現場で取り入れる運動遊び</li>
+            <li><i class="fa-solid fa-check-circle"></i>運動遊びの取り入れ方・実践ポイント</li>
+            <li><i class="fa-solid fa-check-circle"></i>まずは先生たちが楽しむ！運動遊び体験講座</li>
+          </ul>
+        </div>
+        <div class="dispatch-card">
+          <div class="dispatch-card__icon"><i class="fa-solid fa-users"></i></div>
+          <p class="dispatch-card__title">PTAへの出張指導</p>
+          <p class="dispatch-card__desc">保護者の方向けに、親子で楽しめる運動遊びや、お子さんの運動発達についての実践講座を開催します。</p>
+          <ul class="dispatch-topic-list">
+            <li><i class="fa-solid fa-check-circle"></i>親子で楽しむ運動遊び体験会</li>
+            <li><i class="fa-solid fa-check-circle"></i>子どもの運動発達と声がけのコツ</li>
+            <li><i class="fa-solid fa-check-circle"></i>家でできる運動遊びの紹介</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dispatch-cta">
+        <p><i class="fa-solid fa-lightbulb"></i> 「こんな内容はできる？」というご質問も大歓迎です。まずはお気軽にLINEでご相談ください！</p>
+        <a href="https://lin.ee/VoPXDMK" class="btn btn--orange" target="_blank" rel="noopener">
+          <i class="fa-brands fa-line"></i> LINEで相談する
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 導入後のサポート -->
+  <section class="section section--bg" id="support">
+    <div class="container">
+      <p class="section-label">After Support</p>
+      <h2 class="section-title">導入後のサポート</h2>
+      <p class="section-lead">指導開始後も、子どもたちと施設のために継続してサポートします。</p>
+
+      <div class="support-grid">
+        <div class="support-card">
+          <div class="support-card__icon"><i class="fa-solid fa-flag-checkered"></i></div>
+          <p class="support-card__title">運動会・イベント対応</p>
+          <p class="support-card__body">運動会の競技指導や、親子運動教室などのイベントにも対応します。特別プログラムの企画・進行もお任せください。</p>
+        </div>
+        <div class="support-card">
+          <div class="support-card__icon"><i class="fa-solid fa-chalkboard"></i></div>
+          <p class="support-card__title">先生向け研修</p>
+          <p class="support-card__body">保育士・教員の先生方向けに、運動遊びの知識や指導スキルをお伝えする研修も実施可能。日常の保育に活かせる内容です。</p>
+        </div>
+        <div class="support-card">
+          <div class="support-card__icon"><i class="fa-solid fa-comments"></i></div>
+          <p class="support-card__title">保護者向け説明会</p>
+          <p class="support-card__body">保護者の方に向けた運動の大切さや、家でできる運動遊びの講演会・説明会も対応します。園全体での取り組みを支援します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <div class="cta-strip" id="contact">
+    <p class="cta-strip__label">Contact</p>
+    <h2>まずは無料体験から<br>はじめてみませんか？</h2>
+    <p>「どんな指導をしているの？」「うちの園に合う？」<br>どんな些細な質問でも、お気軽にLINEでご連絡ください！</p>
+    <div class="btn-group">
+      <a href="https://lin.ee/VoPXDMK" class="btn btn--white" target="_blank" rel="noopener">
+        <i class="fa-brands fa-line"></i> LINEで問い合わせる
+      </a>
+      <a href="mailto:possi.spo99@gmail.com" class="btn btn--ghost">
+        <i class="fa-solid fa-envelope"></i> メールで問い合わせる
+      </a>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__logo">
+            <div class="footer__logo-icon"><i class="fa-solid fa-person-running"></i></div>
+            <div class="footer__logo-text">かめちゃん<span>運動教室</span></div>
+          </div>
+          <p class="footer__desc">
+            「挑戦する勇気が、自信になる」<br />
+            すべての子どもの可能性を最大限に引き出す運動教室。<br />
+            運動が苦手な子も、得意な子も、大歓迎です。
+          </p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/possispo" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://lin.ee/VoPXDMK" aria-label="LINE"><i class="fa-brands fa-line"></i></a>
+          </div>
+        </div>
+        <div>
+          <p class="footer__col-title">メニュー</p>
+          <ul class="footer__links">
+            <li><a href="index.html#about">教室について</a></li>
+            <li><a href="coach.html">コーチ紹介</a></li>
+            <li><a href="patrol.html">巡回指導</a></li>
+            <li><a href="index.html#features">選ばれる理由</a></li>
+            <li><a href="index.html#lessons">レッスン内容</a></li>
+            <li><a href="index.html#pricing">料金プラン</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">お問い合わせ</p>
+          <div class="footer__contact-item">
+            <i class="fa-brands fa-line"></i>
+            <span>LINEでのお申し込み・お問い合わせ歓迎</span>
+          </div>
+          <div class="footer__contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>possi.spo99@gmail.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2024 <span>かめちゃん運動教室</span>. All rights reserved.</p>
+        <p style="font-size:.75rem; color:rgba(255,255,255,.4);">Designed for kids</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // ヘッダー スクロール影
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ハンバーガーメニュー
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      if (isOpen) {
+        mobileMenu.style.display = 'flex';
+        mobileMenu.style.pointerEvents = 'auto';
+        requestAnimationFrame(() => mobileMenu.classList.add('open'));
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu.classList.remove('open');
+        mobileMenu.style.pointerEvents = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+      mobileMenu.classList.remove('open');
+      mobileMenu.style.pointerEvents = 'none';
+      document.body.style.overflow = '';
+    }
+
+    /* ---- ドロップダウン クリックトグル（複数対応） ---- */
+    document.querySelectorAll('.nav-dropdown-wrap').forEach(wrap => {
+      const trigger = wrap.querySelector('.nav-dropdown-trigger');
+      const menu    = wrap.querySelector('.nav-dropdown-menu');
+      if (!trigger) return;
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = wrap.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown-wrap').forEach(w => w.classList.remove('open'));
+        if (!isOpen) wrap.classList.add('open');
+      });
+      menu.addEventListener('click', (e) => e.stopPropagation());
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown-wrap').forEach(w => w.classList.remove('open'));
+    });
+  </script>
+
+</body>
+</html>

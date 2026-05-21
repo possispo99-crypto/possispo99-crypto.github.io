@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コーチ紹介 | かめちゃん運動教室</title>
+  <meta name="description" content="かめちゃん運動教室のコーチ紹介ページ。富山県から運動嫌いをなくすことを目標に活動するかめちゃん先生をご紹介します。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    /* ===== デザイントークン ===== */
+    :root {
+      --orange:     #FF6B1A;
+      --orange-lt:  #FF8C42;
+      --orange-bg:  #FFF4EC;
+      --navy:       #1A2456;
+      --text:       #1A2456;
+      --text-sub:   #5A6A8A;
+      --border:     #E8EBF4;
+      --white:      #FFFFFF;
+      --bg:         #F7F8FC;
+      --radius-sm:  10px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --shadow-sm:  0 2px 12px rgba(26,36,86,.06);
+      --shadow-md:  0 8px 32px rgba(26,36,86,.12);
+      --transition: .25s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow var(--transition);
+    }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(26,36,86,.08); }
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 24px;
+    }
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: clamp(.85rem, 3.5vw, 1.35rem);
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .header__logo-icon {
+      width: 38px; height: 38px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+    .header__logo-text span { color: var(--orange); }
+
+    /* ---- ナビ（ドロップダウン付き） ---- */
+    .header__nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    @media (max-width: 768px) { .header__nav { display: none; } }
+    .header__nav a {
+      color: var(--text-sub);
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+    .header__nav a:hover { color: var(--orange); }
+
+    .nav-dropdown-wrap { position: relative; }
+    .nav-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      color: var(--text-sub);
+      font-weight: 700;
+      font-size: .9rem;
+      transition: color var(--transition);
+    }
+    .nav-dropdown-trigger:hover { color: var(--orange); }
+    .nav-dropdown-wrap.open .nav-dropdown-trigger { color: var(--orange); }
+    .nav-dropdown-trigger i { font-size: .65rem; transition: transform .2s; }
+    .nav-dropdown-wrap.open .nav-dropdown-trigger i { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      min-width: 148px;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .nav-dropdown-wrap.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      font-size: .875rem;
+      font-weight: 700;
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+    }
+    .nav-dropdown-menu a:hover { background: var(--orange-bg); color: var(--orange); }
+    .nav-dropdown-menu a.active { color: var(--orange); background: var(--orange-bg); }
+    .nav-dropdown-menu a i { width: 14px; color: var(--orange); }
+
+    .header__cta { display: flex; align-items: center; gap: 12px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn--orange {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 4px 16px rgba(255,107,26,.35);
+    }
+    .btn--orange:hover { background: var(--orange-lt); transform: translateY(-2px); }
+    .btn--navy {
+      background: var(--navy);
+      color: var(--white);
+      padding: 8px 14px;
+      font-size: .8rem;
+      white-space: nowrap;
+    }
+    .btn--navy:hover {
+      background: #2a3566;
+      transform: translateY(-2px);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    @media (max-width: 768px) { .hamburger { display: flex; } }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* モバイルメニュー */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 850;
+      background: rgba(255,255,255,.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity .25s ease;
+      pointer-events: none;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { color: var(--text); }
+    .mobile-menu a:hover { color: var(--orange); }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #2D3A7C 100%);
+      padding: 72px 24px 80px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,107,26,.2) 0%, transparent 60%);
+    }
+    .page-hero__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .page-hero__title {
+      font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .page-hero__sub {
+      font-size: 1rem;
+      opacity: .75;
+    }
+    .page-hero__wave {
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+    }
+
+    /* ===== SECTION ===== */
+    .section { padding: 80px 0; }
+    .section--bg { background: var(--bg); }
+
+    /* ===== COACH CARD ===== */
+    .coach-wrap {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .coach-card {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .coach-card { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .coach-photo-wrap {
+      position: sticky;
+      top: 88px;
+    }
+    .coach-photo {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      object-fit: cover;
+    }
+    .coach-name-badge {
+      margin-top: 20px;
+      background: var(--orange);
+      color: white;
+      text-align: center;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+    }
+    .coach-name-badge__name {
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .coach-name-badge__role {
+      font-size: .8rem;
+      opacity: .85;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .coach-body {}
+    .coach-tagline {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.5;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid var(--orange);
+    }
+    .coach-tagline em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .coach-bio {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .coach-bio p {
+      font-size: .975rem;
+      color: var(--text-sub);
+      line-height: 1.9;
+    }
+
+    .coach-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 480px) { .coach-stats { grid-template-columns: 1fr 1fr; } }
+    .coach-stat {
+      background: var(--orange-bg);
+      border-radius: var(--radius-md);
+      padding: 20px 16px;
+      text-align: center;
+      border: 1px solid rgba(255,107,26,.15);
+    }
+    .coach-stat__num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .coach-stat__label {
+      font-size: .75rem;
+      color: var(--text-sub);
+      font-weight: 700;
+    }
+
+    .coach-activities {
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      border-left: 4px solid var(--orange);
+    }
+    .coach-activities__title {
+      font-size: .85rem;
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .coach-activities ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .coach-activities li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .9rem;
+      color: var(--text-sub);
+    }
+    .coach-activities li i {
+      color: var(--orange);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0D1226;
+      color: rgba(255,255,255,.7);
+      padding: 56px 0 0;
+    }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+    @media (max-width: 768px) { .footer__top { grid-template-columns: 1fr; gap: 28px; } }
+    .footer__logo { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .footer__logo-icon {
+      width: 36px; height: 36px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1rem;
+    }
+    .footer__logo-text {
+      font-weight: 900; font-size: 1.05rem; color: white;
+    }
+    .footer__logo-text span { color: var(--orange-lt); }
+    .footer__desc { font-size: .85rem; line-height: 1.8; margin-bottom: 20px; }
+    .footer__social { display: flex; gap: 12px; }
+    .footer__social a {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.7);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .footer__social a:hover { background: var(--orange); color: white; }
+    .footer__col-title { font-weight: 900; color: white; font-size: .9rem; margin-bottom: 14px; }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer__links a { font-size: .875rem; transition: color var(--transition); }
+    .footer__links a:hover { color: var(--orange-lt); }
+    .footer__contact-item { display: flex; gap: 10px; margin-bottom: 10px; font-size: .875rem; }
+    .footer__contact-item i { color: var(--orange-lt); margin-top: 2px; }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer__copy { font-size: .8rem; }
+    .footer__copy span { color: var(--orange-lt); font-weight: 700; }
+
+    /* ===== CTA STRIP ===== */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-lt) 100%);
+      padding: 56px 24px;
+      text-align: center;
+      color: white;
+    }
+    .cta-strip h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; margin-bottom: 10px; }
+    .cta-strip p { opacity: .88; margin-bottom: 28px; }
+    .cta-strip .btn--white {
+      background: white;
+      color: var(--orange);
+      font-weight: 900;
+    }
+    .cta-strip .btn--white:hover { background: var(--orange-bg); transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo" aria-label="かめちゃん運動教室">
+          <div class="header__logo-icon"><i class="fa-solid fa-person-running"></i></div>
+          <div class="header__logo-text">かめちゃん<span>運動教室</span></div>
+        </a>
+
+        <nav class="header__nav" aria-label="メインナビゲーション">
+          <!-- 教室について ドロップダウン -->
+          <div class="nav-dropdown-wrap">
+            <span class="nav-dropdown-trigger">
+              教室について <i class="fa-solid fa-chevron-down"></i>
+            </span>
+            <div class="nav-dropdown-menu">
+              <a href="index.html#about"><i class="fa-solid fa-school"></i> 教室について</a>
+              <a href="coach.html" class="active"><i class="fa-solid fa-user"></i> コーチ紹介</a>
+              <a href="blog.html"><i class="fa-solid fa-pen-to-square"></i> ブログ</a>
+            </div>
+          </div>
+          <!-- お仕事依頼 ドロップダウン -->
+          <div class="nav-dropdown-wrap">
+            <span class="nav-dropdown-trigger">
+              お仕事依頼 <i class="fa-solid fa-chevron-down"></i>
+            </span>
+            <div class="nav-dropdown-menu">
+              <a href="patrol.html"><i class="fa-solid fa-route"></i> 巡回指導</a>
+              <a href="oyako.html"><i class="fa-solid fa-people-group"></i> 親子活動</a>
+              <a href="lecture.html"><i class="fa-solid fa-person-chalkboard"></i> 講演会</a>
+              <a href="pta.html"><i class="fa-solid fa-hands-holding-child"></i> PTA活動</a>
+            </div>
+          </div>
+          <a href="index.html#features">選ばれる理由</a>
+          <a href="index.html#lessons">レッスン</a>
+          <a href="index.html#pricing">料金</a>
+          <a href="index.html#faq">よくある質問</a>
+        </nav>
+
+        <div class="header__cta">
+          <a href="dispatch_reserve.html" class="btn btn--navy">出張指導ご予約</a>
+          <a href="trial.html" class="btn btn--orange">無料体験はこちら</a>
+          <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about" onclick="closeMenu()">教室について</a>
+    <a href="coach.html"       onclick="closeMenu()">コーチ紹介</a>
+    <a href="blog.html" onclick="closeMenu()">ブログ</a>
+    <a href="patrol.html"      onclick="closeMenu()">巡回指導</a>
+    <a href="oyako.html"       onclick="closeMenu()">親子活動</a>
+    <a href="lecture.html"     onclick="closeMenu()">講演会</a>
+    <a href="pta.html"         onclick="closeMenu()">PTA活動</a>
+    <a href="index.html#features" onclick="closeMenu()">選ばれる理由</a>
+    <a href="index.html#lessons" onclick="closeMenu()">レッスン</a>
+    <a href="index.html#pricing" onclick="closeMenu()">料金</a>
+    <a href="index.html#faq" onclick="closeMenu()">よくある質問</a>
+    <a href="dispatch_reserve.html" class="btn btn--navy" onclick="closeMenu()">出張指導ご予約</a>
+    <a href="trial.html" class="btn btn--orange" onclick="closeMenu()">無料体験はこちら</a>
+  </div>
+
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero__label">
+      <i class="fa-solid fa-user"></i> Coach
+    </div>
+    <h1 class="page-hero__title">コーチ紹介</h1>
+    <p class="page-hero__sub">子どもたちの可能性を引き出すプロフェッショナル</p>
+    <div class="page-hero__wave">
+      <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,24 C360,48 1080,0 1440,24 L1440,48 L0,48 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- COACH PROFILE -->
+  <section class="section">
+    <div class="container">
+      <div class="coach-wrap">
+        <div class="coach-card">
+
+          <!-- 写真 -->
+          <div class="coach-photo-wrap">
+            <img src="images/coach.png" alt="かめちゃん先生" class="coach-photo" />
+            <div class="coach-name-badge">
+              <p class="coach-name-badge__name">かめちゃん先生</p>
+              <p class="coach-name-badge__role">かめちゃん運動教室 代表コーチ</p>
+            </div>
+          </div>
+
+          <!-- テキスト -->
+          <div class="coach-body">
+            <p class="coach-tagline">
+              <em>運動嫌いを</em>、<br />
+              富山県から<em>なくす</em>。
+            </p>
+
+            <div class="coach-bio">
+              <p>子どもたちの「運動が嫌い」という言葉を聞くたびに、寂しさを感じていました。運動をしない子、苦手意識を持つ子を見て、「この子たちに楽しさを伝えたい」という想いからかめちゃん運動教室を立ち上げました。</p>
+              <p>様々な運動遊びを通じて、すべての子どもに「体を動かすことって楽しい！」と思ってもらえるよう、200種類以上のプログラムを日々研究・実践しています。</p>
+              <p>発達障がいへの専門資格も保持しており、どんな子にも個性を活かした指導ができることが強みです。運動が苦手な子も、得意な子も、全力でサポートします。</p>
+            </div>
+
+            <!-- 実績 -->
+            <div class="coach-stats">
+              <div class="coach-stat">
+                <p class="coach-stat__num">2,000<span style="font-size:.9rem">人+</span></p>
+                <p class="coach-stat__label">年間指導人数</p>
+              </div>
+              <div class="coach-stat">
+                <p class="coach-stat__num">200<span style="font-size:.9rem">種+</span></p>
+                <p class="coach-stat__label">運動遊びの数</p>
+              </div>
+              <div class="coach-stat">
+                <p class="coach-stat__num">4</p>
+                <p class="coach-stat__label">開催地域</p>
+              </div>
+            </div>
+
+            <!-- 活動内容 -->
+            <div class="coach-activities">
+              <p class="coach-activities__title">活動内容</p>
+              <ul>
+                <li><i class="fa-solid fa-check-circle"></i>保育園への巡回指導</li>
+                <li><i class="fa-solid fa-check-circle"></i>外部委託・学童での指導</li>
+                <li><i class="fa-solid fa-check-circle"></i>講演会の講師活動</li>
+                <li><i class="fa-solid fa-check-circle"></i>発達障がい支援の専門資格保持</li>
+                <li><i class="fa-solid fa-check-circle"></i>運動嫌いをゼロにするための日々の研究・実践</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== たくとコーチ ===== -->
+  <section class="section section--bg" aria-label="たくとコーチ">
+    <div class="container">
+      <div class="coach-card">
+
+        <!-- 写真プレースホルダー -->
+        <div class="coach-photo-wrap">
+          <img src="images/takuto_coach.jpg" alt="たくとコーチ" class="coach-photo" style="object-fit:cover;" />
+          <div class="coach-name-badge">
+            <p class="coach-name-badge__name">たくとコーチ</p>
+            <p class="coach-name-badge__role">サッカー・運動指導コーチ</p>
+          </div>
+        </div>
+
+        <!-- テキスト -->
+        <div class="coach-body">
+          <p class="coach-tagline">
+            <em>全力で楽しむ</em>ことが、<br />
+            子どもたちへの<em>最高の指導</em>。
+          </p>
+
+          <div class="coach-bio">
+            <p>5年間、小学生サッカーの現場に関わり続けてきた子どもの運動指導のプロ。子どもたちが全力で楽しめるように、イベントではコスプレで登場したり、なかなか参加できない子には一緒に活動するなど、子ども目線の指導を大切にしています。</p>
+            <p>「楽しい！また行きたい！」と思ってもらえるよう、流行に敏感でシール交換なども取り入れるなど、子どもとの関係づくりを誰よりも真剣に考えています。</p>
+            <p>サッカー歴20年。現在も社会人チームに登録し、現役でプレーしています。</p>
+          </div>
+
+          <!-- 活動内容 -->
+          <div class="coach-activities">
+            <p class="coach-activities__title">得意なこと・強み</p>
+            <ul>
+              <li><i class="fa-solid fa-check-circle"></i>5年間の小学生サッカー指導経験</li>
+              <li><i class="fa-solid fa-check-circle"></i>参加しにくい子への個別サポート</li>
+              <li><i class="fa-solid fa-check-circle"></i>イベントを全力で盛り上げる（コスプレ参加！）</li>
+              <li><i class="fa-solid fa-check-circle"></i>子どもが「また来たい！」と思える関係づくり</li>
+              <li><i class="fa-solid fa-check-circle"></i>サッカー歴20年・現役社会人プレーヤー</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <h2>かめちゃん先生の授業、体験してみませんか？</h2>
+    <p>初回体験は完全無料。まずはお気軽にどうぞ！</p>
+    <a href="trial.html" class="btn btn--white">
+      <i class="fa-solid fa-calendar-check"></i> 無料体験に申し込む
+    </a>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__logo">
+            <div class="footer__logo-icon"><i class="fa-solid fa-person-running"></i></div>
+            <div class="footer__logo-text">かめちゃん<span>運動教室</span></div>
+          </div>
+          <p class="footer__desc">
+            「挑戦する勇気が、自信になる」<br />
+            すべての子どもの可能性を最大限に引き出す運動教室。<br />
+            運動が苦手な子も、得意な子も、大歓迎です。
+          </p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/possispo" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://lin.ee/VoPXDMK" aria-label="LINE"><i class="fa-brands fa-line"></i></a>
+          </div>
+        </div>
+        <div>
+          <p class="footer__col-title">メニュー</p>
+          <ul class="footer__links">
+            <li><a href="index.html#about">教室について</a></li>
+            <li><a href="coach.html">コーチ紹介</a></li>
+            <li><a href="index.html#features">選ばれる理由</a></li>
+            <li><a href="index.html#lessons">レッスン内容</a></li>
+            <li><a href="index.html#pricing">料金プラン</a></li>
+            <li><a href="index.html#faq">よくある質問</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">お問い合わせ</p>
+          <div class="footer__contact-item">
+            <i class="fa-brands fa-line"></i>
+            <span>LINEでのお申し込み・お問い合わせ歓迎</span>
+          </div>
+          <div class="footer__contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <span>possi.spo99@gmail.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2024 <span>かめちゃん運動教室</span>. All rights reserved.</p>
+        <p style="font-size:.75rem; color:rgba(255,255,255,.4);">Designed for kids</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // ヘッダー スクロール影
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ハンバーガーメニュー
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      if (isOpen) {
+        mobileMenu.style.display = 'flex';
+        mobileMenu.style.pointerEvents = 'auto';
+        requestAnimationFrame(() => mobileMenu.classList.add('open'));
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu.classList.remove('open');
+        mobileMenu.style.pointerEvents = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+      mobileMenu.classList.remove('open');
+      mobileMenu.style.pointerEvents = 'none';
+      document.body.style.overflow = '';
+    }
+
+    /* ---- ドロップダウン クリックトグル（複数対応） ---- */
+    document.querySelectorAll('.nav-dropdown-wrap').forEach(wrap => {
+      const trigger = wrap.querySelector('.nav-dropdown-trigger');
+      const menu    = wrap.querySelector('.nav-dropdown-menu');
+      if (!trigger) return;
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = wrap.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown-wrap').forEach(w => w.classList.remove('open'));
+        if (!isOpen) wrap.classList.add('open');
+      });
+      menu.addEventListener('click', (e) => e.stopPropagation());
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown-wrap').forEach(w => w.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>

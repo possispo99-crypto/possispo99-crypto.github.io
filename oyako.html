@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>親子活動 | かめちゃん運動教室</title>
+  <meta name="description" content="かめちゃん運動教室の親子活動。親子で体を動かして、笑顔あふれる時間を。保育園・地域イベント・学童などに出張対応します。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    /* ===== デザイントークン ===== */
+    :root {
+      --orange:     #FF6B1A;
+      --orange-lt:  #FF8C42;
+      --orange-bg:  #FFF4EC;
+      --navy:       #1A2456;
+      --text:       #1A2456;
+      --text-sub:   #5A6A8A;
+      --border:     #E8EBF4;
+      --white:      #FFFFFF;
+      --bg:         #F7F8FC;
+      --radius-sm:  10px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --shadow-sm:  0 2px 12px rgba(26,36,86,.06);
+      --shadow-md:  0 8px 32px rgba(26,36,86,.12);
+      --transition: .25s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow var(--transition);
+    }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(26,36,86,.08); }
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 24px;
+    }
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: clamp(.85rem, 3.5vw, 1.35rem);
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .header__logo-icon {
+      width: 38px; height: 38px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+    .header__logo-text span { color: var(--orange); }
+
+    /* ---- ナビ（ドロップダウン付き） ---- */
+    .header__nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    @media (max-width: 768px) { .header__nav { display: none; } }
+    .header__nav a {
+      color: var(--text-sub);
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+    .header__nav a:hover { color: var(--orange); }
+
+    .nav-dropdown-wrap { position: relative; }
+    .nav-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      color: var(--text-sub);
+      font-weight: 700;
+      font-size: .9rem;
+      transition: color var(--transition);
+    }
+    .nav-dropdown-trigger:hover { color: var(--orange); }
+    .nav-dropdown-wrap.open .nav-dropdown-trigger { color: var(--orange); }
+    .nav-dropdown-trigger i { font-size: .65rem; transition: transform .2s; }
+    .nav-dropdown-wrap.open .nav-dropdown-trigger i { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      min-width: 148px;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .nav-dropdown-wrap.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      font-size: .875rem;
+      font-weight: 700;
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+    }
+    .nav-dropdown-menu a:hover { background: var(--orange-bg); color: var(--orange); }
+    .nav-dropdown-menu a.active { color: var(--orange); background: var(--orange-bg); }
+    .nav-dropdown-menu a i { width: 14px; color: var(--orange); }
+
+    .header__cta { display: flex; align-items: center; gap: 12px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn--orange {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 4px 16px rgba(255,107,26,.35);
+    }
+    .btn--orange:hover { background: var(--orange-lt); transform: translateY(-2px); }
+    .btn--navy {
+      background: var(--navy);
+      color: var(--white);
+      padding: 8px 14px;
+      font-size: .8rem;
+      white-space: nowrap;
+    }
+    .btn--navy:hover {
+      background: #2a3566;
+      transform: translateY(-2px);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    @media (max-width: 768px) { .hamburger { display: flex; } }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* モバイルメニュー */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 850;
+      background: rgba(255,255,255,.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity .25s ease;
+      pointer-events: none;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { color: var(--text); }
+    .mobile-menu a:hover { color: var(--orange); }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #2D3A7C 100%);
+      padding: 72px 24px 80px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,107,26,.2) 0%, transparent 60%);
+    }
+    .page-hero__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .page-hero__title {
+      font-family: 'Poppins', 'Noto Sans JP', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .page-hero__sub {
+      font-size: 1rem;
+      opacity: .75;
+    }
+    .page-hero__wave {
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+    }
+
+    /* ===== SECTION ===== */
+    .section { padding: 72px 0; }
+    .section--bg { background: var(--bg); }
+
+    /* ===== SECTION HEADER ===== */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange-bg);
+      color: var(--orange);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .section-sub {
+      font-size: .975rem;
+      color: var(--text-sub);
+      max-width: 600px;
+    }
+
+    /* ===== INTRO（左画像 右テキスト） ===== */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .intro-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .intro-img {
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      object-fit: cover;
+      width: 100%;
+      aspect-ratio: 4/3;
+    }
+    .intro-body p {
+      font-size: .975rem;
+      color: var(--text-sub);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+    .highlight-box {
+      background: var(--orange-bg);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      font-size: .9rem;
+      color: var(--navy);
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    /* ===== 場面カード ===== */
+    .scene-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
+    @media (max-width: 768px) { .scene-grid { grid-template-columns: 1fr; } }
+    .scene-card {
+      background: white; border-radius: var(--radius-md); padding: 28px 20px;
+      border: 1px solid var(--border); box-shadow: var(--shadow-sm); text-align: center;
+    }
+    .scene-card__icon { width: 56px; height: 56px; background: var(--orange-bg); border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--orange); margin: 0 auto 14px; }
+    .scene-card__title { font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
+    .scene-card__body { font-size: .85rem; color: var(--text-sub); line-height: 1.7; }
+
+    /* ===== プログラムカード ===== */
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 36px;
+    }
+    @media (max-width: 768px) { .program-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 481px) and (max-width: 768px) { .program-grid { grid-template-columns: 1fr 1fr; } }
+    .program-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .program-card__num {
+      font-size: .75rem;
+      font-weight: 900;
+      color: var(--orange);
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+    .program-card__title { font-weight: 900; font-size: .975rem; margin-bottom: 8px; }
+    .program-card__body { font-size: .85rem; color: var(--text-sub); line-height: 1.7; }
+
+    /* ===== 料金 ===== */
+    .pricing-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    @media (max-width: 768px) { .pricing-wrap { grid-template-columns: 1fr; } }
+    .pricing-card { background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 2px solid var(--border); overflow: hidden; }
+    .pricing-card--main { border-color: var(--orange); }
+    .pricing-card__head { padding: 24px 28px 18px; border-bottom: 1px solid var(--border); }
+    .pricing-card--main .pricing-card__head { background: linear-gradient(135deg, var(--orange), var(--orange-lt)); border-bottom: none; }
+    .pricing-card__name { font-weight: 900; font-size: 1.15rem; margin-bottom: 4px; }
+    .pricing-card--main .pricing-card__name { color: white; }
+    .pricing-card__desc { font-size: .85rem; color: var(--text-sub); }
+    .pricing-card--main .pricing-card__desc { color: rgba(255,255,255,.85); }
+    .pricing-card__body { padding: 24px 28px; }
+    .pricing-card__price { font-size: 2.4rem; font-weight: 900; font-family: 'Poppins', sans-serif; color: var(--orange); line-height: 1; margin-bottom: 4px; }
+    .pricing-card__note { font-size: .8rem; color: var(--text-sub); margin-bottom: 18px; }
+    .pricing-card__list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .pricing-card__list li { display: flex; align-items: flex-start; gap: 10px; font-size: .875rem; }
+    .pricing-card__list li i { color: var(--orange); margin-top: 3px; flex-shrink: 0; }
+    .pricing-note { background: var(--bg); border-radius: var(--radius-md); padding: 24px; }
+    .pricing-note__title { font-weight: 900; margin-bottom: 12px; }
+    .pricing-note__list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .pricing-note__list li { display: flex; align-items: flex-start; gap: 8px; font-size: .875rem; color: var(--text-sub); }
+    .pricing-note__list li i { color: var(--orange); margin-top: 3px; flex-shrink: 0; }
+
+    /* ===== フロー ===== */
+    .flow-steps { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+    .flow-step { display: flex; gap: 24px; align-items: flex-start; position: relative; }
+    .flow-step:not(:last-child)::after {
+      content: ''; position: absolute; left: 23px; top: 48px; bottom: -20px;
+      width: 2px; background: linear-gradient(to bottom, var(--orange), var(--border));
+    }
+    .flow-step__num {
+      min-width: 48px; height: 48px; background: var(--orange); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 900; font-size: 1.1rem; font-family: 'Poppins', sans-serif;
+      flex-shrink: 0; box-shadow: 0 4px 12px rgba(255,107,26,.3);
+    }
+    .flow-step__body {
+      background: white; border-radius: var(--radius-md); padding: 20px 24px;
+      border: 1px solid var(--border); flex: 1; margin-bottom: 20px;
+    }
+    .flow-step__title { font-weight: 900; font-size: 1rem; margin-bottom: 6px; }
+    .flow-step__desc { font-size: .875rem; color: var(--text-sub); line-height: 1.7; }
+
+    /* ===== CTA STRIP ===== */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-lt) 100%);
+      padding: 72px 24px;
+      text-align: center;
+      color: white;
+    }
+    .cta-strip h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; margin-bottom: 10px; }
+    .cta-strip p { opacity: .88; margin-bottom: 28px; }
+    .cta-strip .btn--white {
+      background: white;
+      color: var(--orange);
+      font-weight: 900;
+    }
+    .cta-strip .btn--white:hover { background: var(--orange-bg); transform: translateY(-2px); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0D1226;
+      color: rgba(255,255,255,.7);
+      padding: 56px 0 0;
+    }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+    @media (max-width: 768px) { .footer__top { grid-template-columns: 1fr; gap: 28px; } }
+    .footer__logo { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .footer__logo-icon {
+      width: 36px; height: 36px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1rem;
+    }
+    .footer__logo-text {
+      font-weight: 900; font-size: 1.05rem; color: white;
+    }
+    .footer__logo-text span { color: var(--orange-lt); }
+    .footer__desc { font-size: .85rem; line-height: 1.8; margin-bottom: 20px; }
+    .footer__social { display: flex; gap: 12px; }
+    .footer__social a {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.7);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .footer__social a:hover { background: var(--orange); color: white; }
+    .footer__col-title { font-weight: 900; color: white; font-size: .9rem; margin-bottom: 14px; }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer__links a { font-size: .875rem; transition: color var(--transition); }
+    .footer__links a:hover { color: var(--orange-lt); }
+    .footer__contact-item { display: flex; gap: 10px; margin-bottom: 10px; font-size: .875rem; }
+    .footer__contact-item i { color: var(--orange-lt); margin-top: 2px; }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer__copy { font-size: .8rem; }
+    .footer__copy span { color: var(--orange-lt); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo" aria-label="かめちゃん運動教室">
+          <div class="header__logo-icon"><i class="fa-solid fa-person-running"></i></div>
+          <div class="header__logo-text">かめちゃん<span>運動教室</span></div>
+        </a>
+
+        <nav class="header__nav" aria-label="メインナビゲーション">
+          <!-- 教室について -->
+          <div class="nav-dropdown-wrap">
+            <span class="nav-dropdown-trigger">
+              教室について <i class="fa-solid fa-chevron-down"></i>
+            </span>
+            <div class="nav-dropdown-menu">
+              <a href="index.html#about"><i class="fa-solid fa-school"></i> 教室について</a>
+              <a href="coach.html"><i class="fa-solid fa-user"></i> コーチ紹介</a>
+              <a href="blog.html"><i class="fa-solid fa-pen-to-square"></i> ブログ</a>
+            </div>
+          </div>
+          <!-- お仕事依頼 -->
+          <div class="nav-dropdown-wrap">
+            <span class="nav-dropdown-trigger">
+              お仕事依頼 <i class="fa-solid fa-chevron-down"></i>
+            </span>
+            <div class="nav-dropdown-menu">
+              <a href="patrol.html"><i class="fa-solid fa-route"></i> 巡回指導</a>
+              <a href="oyako.html" class="active"><i class="fa-solid fa-people-group"></i> 親子活動</a>
+              <a href="lecture.html"><i class="fa-solid fa-person-chalkboard"></i> 講演会</a>
+              <a href="pta.html"><i class="fa-solid fa-hands-holding-child"></i> PTA活動</a>
+            </div>
+          </div>
+          <a href="index.html#features">選ばれる理由</a>
+          <a href="index.html#lessons">レッスン</a>
+          <a href="index.html#pricing">料金</a>
+          <a href="index.html#faq">よくある質問</a>
+        </nav>
+
+        <div class="header__cta">
+          <a href="dispatch_reserve.html" class="btn btn--navy">出張指導ご予約</a>
+          <a href="trial.html" class="btn btn--orange">無料体験はこちら</a>
+          <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about" onclick="closeMenu()">教室について</a>
+    <a href="coach.html"       onclick="closeMenu()">コーチ紹介</a>
+    <a href="blog.html" onclick="closeMenu()">ブログ</a>
+    <a href="patrol.html"      onclick="closeMenu()">巡回指導</a>
+    <a href="oyako.html"       onclick="closeMenu()">親子活動</a>
+    <a href="lecture.html"     onclick="closeMenu()">講演会</a>
+    <a href="pta.html"         onclick="closeMenu()">PTA活動</a>
+    <a href="index.html#features" onclick="closeMenu()">選ばれる理由</a>
+    <a href="index.html#lessons"  onclick="closeMenu()">レッスン</a>
+    <a href="index.html#pricing"  onclick="closeMenu()">料金</a>
+    <a href="index.html#faq"      onclick="closeMenu()">よくある質問</a>
+    <a href="dispatch_reserve.html" class="btn btn--navy" onclick="closeMenu()">出張指導ご予約</a>
+    <a href="trial.html" class="btn btn--orange" onclick="closeMenu()">無料体験はこちら</a>
+  </div>
+
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero__label">
+      <i class="fa-solid fa-people-group"></i> PARENT &amp; CHILD
+    </div>
+    <h1 class="page-hero__title">親子活動</h1>
+    <p class="page-hero__sub">親子で体を動かして、笑顔あふれる時間を。</p>
+    <div class="page-hero__wave">
+      <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,24 C360,48 1080,0 1440,24 L1440,48 L0,48 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- 1. 親子活動とは -->
+  <section class="section">
+    <div class="container">
+      <div class="intro-grid">
+        <div>
+          <img src="images/oyako_activity.jpg" alt="親子活動の様子" class="intro-img" />
+        </div>
+        <div class="intro-body">
+          <div class="section-label"><i class="fa-solid fa-people-group"></i> ABOUT</div>
+          <h2 class="section-title">親子活動とは</h2>
+          <p>保護者と子どもが一緒に参加する運動遊びプログラムです。「運動は得意じゃなくて…」というお父さん・お母さんも大丈夫。みんなで楽しめる内容で、体を動かす楽しさを親子で共有できます。</p>
+          <div class="highlight-box">
+            運動が苦手なお父さん・お母さんも楽しめる！競争じゃなく、笑いあふれる時間を一緒に過ごしましょう。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 2. こんな場面で活躍します -->
+  <section class="section section--bg">
+    <div class="container">
+      <div class="section-label"><i class="fa-solid fa-map-location-dot"></i> SCENE</div>
+      <h2 class="section-title">こんな場面で活躍します</h2>
+      <div class="scene-grid">
+        <div class="scene-card">
+          <div class="scene-card__icon"><i class="fa-solid fa-school"></i></div>
+          <p class="scene-card__title">保育園・幼稚園の行事</p>
+          <p class="scene-card__body">運動会の前やイベントとして。子どもたちの笑顔に保護者も巻き込まれます。</p>
+        </div>
+        <div class="scene-card">
+          <div class="scene-card__icon"><i class="fa-solid fa-building-columns"></i></div>
+          <p class="scene-card__title">地域のイベント・公民館</p>
+          <p class="scene-card__body">子育て支援センターや地域のふれあいイベントにも出張対応。</p>
+        </div>
+        <div class="scene-card">
+          <div class="scene-card__icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <p class="scene-card__title">学童・学校行事</p>
+          <p class="scene-card__body">放課後や特別活動として実施。子どもも大人も夢中になれます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 3. プログラム内容 -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label"><i class="fa-solid fa-list-check"></i> PROGRAM</div>
+      <h2 class="section-title">プログラム内容</h2>
+      <div class="program-grid">
+        <div class="program-card">
+          <p class="program-card__num">01</p>
+          <p class="program-card__title">ウォームアップゲーム</p>
+          <p class="program-card__body">親子でじゃんけんや鬼ごっこのアレンジ版。笑いながら体をほぐします。</p>
+        </div>
+        <div class="program-card">
+          <p class="program-card__num">02</p>
+          <p class="program-card__title">ペア運動遊び</p>
+          <p class="program-card__body">馬跳び・クマ歩きなど親子でペアを組んでチャレンジする運動遊び。</p>
+        </div>
+        <div class="program-card">
+          <p class="program-card__num">03</p>
+          <p class="program-card__title">サーキットコース</p>
+          <p class="program-card__body">コーンやマットを使ったサーキット。順番を工夫して全員が楽しめます。</p>
+        </div>
+        <div class="program-card">
+          <p class="program-card__num">04</p>
+          <p class="program-card__title">チーム対抗ゲーム</p>
+          <p class="program-card__body">親子チームで対抗戦！笑いあり、応援ありの盛り上がるゲーム。</p>
+        </div>
+        <div class="program-card">
+          <p class="program-card__num">05</p>
+          <p class="program-card__title">体幹・バランス遊び</p>
+          <p class="program-card__body">親子で支え合いながら行うバランスチャレンジ。自然に信頼感が生まれます。</p>
+        </div>
+        <div class="program-card">
+          <p class="program-card__num">06</p>
+          <p class="program-card__title">クールダウン・振り返り</p>
+          <p class="program-card__body">体をほぐしながら、今日の楽しかったことを共有する時間。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 4. 料金・対応内容 -->
+  <section class="section section--bg">
+    <div class="container">
+      <div class="section-label"><i class="fa-solid fa-yen-sign"></i> PRICING</div>
+      <h2 class="section-title">料金・対応内容</h2>
+      <div class="pricing-wrap" style="margin-top: 36px;">
+        <div class="pricing-card pricing-card--main">
+          <div class="pricing-card__head">
+            <p class="pricing-card__name">親子活動プラン</p>
+            <p class="pricing-card__desc">保護者と子どもが一緒に楽しむ運動遊びプログラム</p>
+          </div>
+          <div class="pricing-card__body">
+            <p class="pricing-card__price">要相談</p>
+            <p class="pricing-card__note">/ 回</p>
+            <ul class="pricing-card__list">
+              <li><i class="fa-solid fa-check-circle"></i><span>所要時間45〜60分</span></li>
+              <li><i class="fa-solid fa-check-circle"></i><span>保護者と子ども合わせて10〜50名程度</span></li>
+              <li><i class="fa-solid fa-check-circle"></i><span>保育園・地域イベント等どこでも</span></li>
+              <li><i class="fa-solid fa-check-circle"></i><span>事前の打ち合わせ込み</span></li>
+              <li><i class="fa-solid fa-check-circle"></i><span>道具一式持参</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="pricing-note" style="align-self: start;">
+          <p class="pricing-note__title">こんな場で実施しています</p>
+          <ul class="pricing-note__list">
+            <li><i class="fa-solid fa-circle-dot"></i><span>保育園・幼稚園の行事</span></li>
+            <li><i class="fa-solid fa-circle-dot"></i><span>地域イベント・子育て支援センター</span></li>
+            <li><i class="fa-solid fa-circle-dot"></i><span>学童・公民館</span></li>
+            <li><i class="fa-solid fa-circle-dot"></i><span>企業の社員向けイベント</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 5. 流れ -->
+  <section class="section">
+    <div class="container" style="max-width: 720px;">
+      <div class="section-label"><i class="fa-solid fa-arrow-right-arrow-left"></i> FLOW</div>
+      <h2 class="section-title">ご依頼の流れ</h2>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step__num">1</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">お問い合わせ</p>
+            <p class="flow-step__desc">LINEまたはメールにてご連絡ください。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step__num">2</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">打ち合わせ</p>
+            <p class="flow-step__desc">目的・参加人数・会場を確認し、プログラムを提案します。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step__num">3</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">当日実施</p>
+            <p class="flow-step__desc">機材・道具はすべてかめちゃん先生が持参。準備の手間なし！</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step__num">4</div>
+          <div class="flow-step__body">
+            <p class="flow-step__title">振り返り</p>
+            <p class="flow-step__desc">終了後に感想を共有。次回へのフィードバックを行います。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <h2>親子で笑顔になれる時間を、一緒に作りませんか？</h2>
+    <p>まずはLINEで「親子活動を検討しています」とひと言送るだけでOK！</p>
+    <a href="https://lin.ee/VoPXDMK" class="btn btn--white" target="_blank" rel="noopener">
+      <i class="fa-brands fa-line"></i> LINEで問い合わせる
+    </a>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__logo">
+            <div class="footer__logo-icon"><i class="fa-solid fa-person-running"></i></div>
+            <div class="footer__logo-text">かめちゃん<span>運動教室</span></div>
+          </div>
+          <p class="footer__desc">「挑戦する勇気が、自信になる」<br>すべての子どもの可能性を最大限に引き出す運動教室。</p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/possispo" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://lin.ee/VoPXDMK" aria-label="LINE"><i class="fa-brands fa-line"></i></a>
+          </div>
+        </div>
+        <div>
+          <p class="footer__col-title">メニュー</p>
+          <ul class="footer__links">
+            <li><a href="index.html#about">教室について</a></li>
+            <li><a href="coach.html">コーチ紹介</a></li>
+            <li><a href="patrol.html">巡回指導</a></li>
+            <li><a href="oyako.html">親子活動</a></li>
+            <li><a href="lecture.html">講演会</a></li>
+            <li><a href="pta.html">PTA活動</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">お問い合わせ</p>
+          <div class="footer__contact-item"><i class="fa-brands fa-line"></i><span>LINEでのお申し込み・お問い合わせ歓迎</span></div>
+          <div class="footer__contact-item"><i class="fa-solid fa-envelope"></i><span>possi.spo99@gmail.com</span></div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2024 <span>かめちゃん運動教室</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      if (isOpen) {
+        mobileMenu.style.display = 'flex';
+        mobileMenu.style.pointerEvents = 'auto';
+        requestAnimationFrame(() => mobileMenu.classList.add('open'));
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu.classList.remove('open');
+        mobileMenu.style.pointerEvents = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+      mobileMenu.classList.remove('open');
+      mobileMenu.style.pointerEvents = 'none';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.nav-dropdown-wrap').forEach(wrap => {
+      const trigger = wrap.querySelector('.nav-dropdown-trigger');
+      const menu    = wrap.querySelector('.nav-dropdown-menu');
+      if (!trigger) return;
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = wrap.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown-wrap').forEach(w => w.classList.remove('open'));
+        if (!isOpen) wrap.classList.add('open');
+      });
+      menu.addEventListener('click', (e) => e.stopPropagation());
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown-wrap').forEach(w => w.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>

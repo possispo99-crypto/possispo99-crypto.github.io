@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>無料体験申し込み | かめちゃん運動教室</title>
+  <meta name="description" content="かめちゃん運動教室の無料体験お申し込みページです。" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:      #FF6B1A;
+      --orange-lt:   #FF8C42;
+      --orange-pale: #FFF3EB;
+      --blue:        #1A6BFF;
+      --blue-lt:     #4D8FFF;
+      --blue-dark:   #0A3FA0;
+      --blue-pale:   #EBF1FF;
+      --green:       #22C55E;
+      --green-pale:  #F0FDF4;
+      --line-green:  #06C755;
+      --text:        #1A1A2E;
+      --text-sub:    #555570;
+      --white:       #FFFFFF;
+      --bg:          #F9F9FB;
+      --border:      #E4E4F0;
+      --radius-sm:   10px;
+      --radius-md:   18px;
+      --radius-lg:   28px;
+      --shadow-sm:   0 2px 12px rgba(0,0,0,.08);
+      --shadow-md:   0 8px 32px rgba(0,0,0,.12);
+      --transition:  .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* =============================================
+       HEADER
+    ============================================= */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .header__inner {
+      width: min(1100px, 92%);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+    .header__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+    .header__logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-lt));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+    }
+    .header__logo-text span { color: var(--orange); }
+    .header__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .875rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      transition: color var(--transition);
+    }
+    .header__back:hover { color: var(--orange); }
+
+    /* =============================================
+       PAGE HERO
+    ============================================= */
+    .page-hero {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--orange) 100%);
+      padding: 110px 0 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      top: -150px; right: -100px;
+    }
+    .page-hero__label {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      color: white;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      padding: 5px 16px;
+      border-radius: 99px;
+      margin-bottom: 14px;
+    }
+    .page-hero__title {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.25;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero__sub {
+      margin-top: 10px;
+      font-size: .95rem;
+      color: rgba(255,255,255,.8);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =============================================
+       MAIN
+    ============================================= */
+    .main {
+      width: min(780px, 92%);
+      margin-inline: auto;
+      padding: 52px 0 80px;
+    }
+
+    /* =============================================
+       セクションタイトル
+    ============================================= */
+    .sec-title {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      letter-spacing: .06em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sec-title::before {
+      content: '';
+      display: block;
+      width: 4px; height: 18px;
+      background: var(--orange);
+      border-radius: 99px;
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       クラス情報カード
+    ============================================= */
+    /* ===== クラス一覧（1行リスト） ===== */
+    .class-grid {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .class-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+    .class-card:last-child { border-bottom: none; }
+    .class-card:hover { background: var(--bg); }
+
+    .class-card__name {
+      font-size: .95rem;
+      font-weight: 900;
+      min-width: 52px;
+      flex-shrink: 0;
+    }
+
+    .class-card__badges {
+      display: flex;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .class-card__times {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .class-card__time-row {
+      font-size: .82rem;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .class-card__time-row i { color: var(--orange); font-size: .75rem; flex-shrink: 0; }
+    .class-card__time-row--warn { color: #92400E; }
+    .class-card__time-row--warn i { color: #D97706; }
+
+    .class-card__place {
+      font-size: .8rem;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      max-width: 160px;
+    }
+    .class-card__place i { color: var(--blue); flex-shrink: 0; }
+
+    .class-card__map {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: 6px 12px;
+      border-radius: 99px;
+      transition: var(--transition);
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .class-card__map:hover { background: var(--blue); color: white; }
+
+    @media (max-width: 640px) {
+      .class-card {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .class-card__place { max-width: 100%; }
+    }
+
+    .class-card__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+    .badge {
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+    .badge--day  { background: var(--orange-pale); color: var(--orange); }
+    .badge--new  { background: var(--green-pale);  color: var(--green); }
+    .badge--wait { background: #FEF3C7; color: #D97706; }
+
+    .class-card__name {
+      font-size: 1.05rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .class-card__row {
+      display: flex;
+      gap: 8px;
+      font-size: .82rem;
+      color: var(--text-sub);
+      margin-bottom: 5px;
+      align-items: flex-start;
+    }
+    .class-card__row i {
+      color: var(--orange);
+      margin-top: 3px;
+      flex-shrink: 0;
+      width: 14px;
+    }
+    .class-card__row--warn i { color: #D97706; }
+    .class-card__row--warn span { color: #92400E; font-weight: 500; }
+
+    .class-card__map {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 12px;
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: 6px 14px;
+      border-radius: 99px;
+      transition: var(--transition);
+      align-self: flex-start;
+    }
+    .class-card__map:hover { background: var(--blue); color: white; }
+
+    /* =============================================
+       SNS バナーエリア
+    ============================================= */
+    .sns-banners {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    /* LINE バナー */
+    .line-banner {
+      background: linear-gradient(135deg, #06C755, #04A847);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      color: white;
+      box-shadow: 0 4px 20px rgba(6,199,85,.25);
+      transition: var(--transition);
+    }
+    .line-banner:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(6,199,85,.35); }
+
+    /* Instagram バナー */
+    .insta-banner {
+      background: linear-gradient(135deg, #833AB4, #C13584, #E1306C, #FD1D1D);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      color: white;
+      box-shadow: 0 4px 20px rgba(225,48,108,.25);
+      transition: var(--transition);
+    }
+    .insta-banner:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(225,48,108,.35); }
+
+    .sns-banner__icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .sns-banner__label { font-size: .75rem; opacity: .85; }
+    .sns-banner__name  { font-size: .95rem; font-weight: 900; line-height: 1.3; }
+    .sns-banner__btn {
+      margin-top: auto;
+      background: white;
+      font-weight: 700;
+      font-size: .8rem;
+      padding: 8px 16px;
+      border-radius: 99px;
+      transition: opacity var(--transition);
+      white-space: nowrap;
+    }
+    .line-banner .sns-banner__btn  { color: #06C755; }
+    .insta-banner .sns-banner__btn { color: #C13584; }
+    .sns-banner__btn:hover { opacity: .85; }
+
+    /* LINE注意書き */
+    .line-note {
+      background: #FFFBEB;
+      border: 1px solid #FCD34D;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      font-size: .85rem;
+      color: #78350F;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .line-note i { color: #D97706; flex-shrink: 0; margin-top: 3px; }
+
+    /* =============================================
+       LINE CTAカード
+    ============================================= */
+    .line-cta-card {
+      background: linear-gradient(135deg, #06C755 0%, #04A847 100%);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 40px rgba(6,199,85,.3);
+      padding: 40px 32px;
+      text-align: center;
+      color: white;
+    }
+    .line-cta-card__icon {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 16px;
+    }
+    .line-cta-card__title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .line-cta-card__sub {
+      font-size: .9rem;
+      opacity: .9;
+      margin-bottom: 28px;
+    }
+
+    /* 3ステップ */
+    .steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 90px;
+    }
+    .step__num {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.25);
+      border: 2px solid rgba(255,255,255,.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      font-weight: 900;
+    }
+    .step__text {
+      font-size: .78rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.4;
+      opacity: .95;
+    }
+    .step-arrow {
+      font-size: 1rem;
+      opacity: .6;
+      flex-shrink: 0;
+      padding: 0 4px;
+      margin-bottom: 20px;
+    }
+
+    .line-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: white;
+      color: #06C755;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 900;
+      padding: 18px 48px;
+      border-radius: 99px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .line-cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+    }
+    .line-cta-btn i { font-size: 1.3rem; }
+    .line-cta-note {
+      margin-top: 14px;
+      font-size: .78rem;
+      opacity: .8;
+    }
+
+    @media (max-width: 480px) {
+      .line-cta-card { padding: 28px 20px; }
+      .steps { gap: 4px; }
+      .step__text { font-size: .72rem; }
+    }
+
+    /* =============================================
+       フッター
+    ============================================= */
+    .footer {
+      background: #0D1226;
+      color: rgba(255,255,255,.6);
+      padding: 24px 0;
+      text-align: center;
+      font-size: .82rem;
+    }
+    .footer span { color: var(--orange-lt); }
+
+    /* =============================================
+       レスポンシブ
+    ============================================= */
+    @media (max-width: 640px) {
+      .form-card__body { padding: 20px 16px; }
+      .class-grid { grid-template-columns: 1fr; }
+      .sns-banners { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__inner">
+      <!-- ===== ロゴ（後から変更可） ===== -->
+      <a href="index.html" class="header__logo">
+        <div class="header__logo-icon"><i class="fa-solid fa-person-running"></i></div>
+        <div class="header__logo-text">かめちゃん<span>運動教室</span></div>
+      </a>
+      <a href="index.html" class="header__back">
+        <i class="fa-solid fa-chevron-left"></i> トップに戻る
+      </a>
+    </div>
+  </header>
+
+
+  <!-- ===== PAGE HERO ===== -->
+  <div class="page-hero">
+    <span class="page-hero__label">FREE TRIAL</span>
+    <h1 class="page-hero__title">無料体験 お申し込み</h1>
+    <p class="page-hero__sub">かめちゃん運動教室 新規生徒募集</p>
+  </div>
+
+
+  <main class="main">
+
+    <!-- =============================================
+         クラス情報
+    ============================================= -->
+    <p class="sec-title">開催クラス一覧</p>
+
+    <!-- ===== クラス情報（後から変更可） ===== -->
+    <div class="class-grid">
+
+      <!-- ===== クラス情報（後から変更可） ===== -->
+
+      <!-- 滑川 -->
+      <div class="class-card">
+        <p class="class-card__name">滑川</p>
+        <div class="class-card__badges">
+          <span class="badge badge--day">金曜</span>
+          <span class="badge badge--wait">待ち</span>
+        </div>
+        <div class="class-card__times">
+          <p class="class-card__time-row class-card__time-row--warn"><i class="fa-solid fa-clock"></i>18:00〜19:00 幼児｜キャンセル待ち・体験大歓迎</p>
+          <p class="class-card__time-row class-card__time-row--warn"><i class="fa-solid fa-clock"></i>19:00〜20:00 小学生｜キャンセル待ち・体験大歓迎</p>
+        </div>
+        <p class="class-card__place"><i class="fa-solid fa-location-dot"></i>滑川市総合体育館 柔道場</p>
+        <a href="https://share.google/jeeUP7zeK2ntfbdRz" target="_blank" class="class-card__map"><i class="fa-solid fa-map-location-dot"></i>マップ</a>
+      </div>
+
+      <!-- 魚津 -->
+      <div class="class-card">
+        <p class="class-card__name">魚津</p>
+        <div class="class-card__badges">
+          <span class="badge badge--day">水曜</span>
+        </div>
+        <div class="class-card__times">
+          <p class="class-card__time-row"><i class="fa-solid fa-clock"></i>18:00〜19:00 幼児</p>
+          <p class="class-card__time-row"><i class="fa-solid fa-clock"></i>19:00〜20:00 小学生</p>
+        </div>
+        <p class="class-card__place"><i class="fa-solid fa-location-dot"></i>大町コミュニティーセンター2階</p>
+        <a href="https://share.google/0H5fB7CXQ1ggszrjy" target="_blank" class="class-card__map"><i class="fa-solid fa-map-location-dot"></i>マップ</a>
+      </div>
+
+      <!-- 富山 -->
+      <div class="class-card">
+        <p class="class-card__name">富山</p>
+        <div class="class-card__badges">
+          <span class="badge badge--day">月曜</span>
+        </div>
+        <div class="class-card__times">
+          <p class="class-card__time-row"><i class="fa-solid fa-clock"></i>18:00〜19:00 幼児</p>
+          <p class="class-card__time-row"><i class="fa-solid fa-clock"></i>19:00〜20:00 小学生</p>
+        </div>
+        <p class="class-card__place"><i class="fa-solid fa-location-dot"></i>富山市民プラザ</p>
+        <a href="https://www.tkc.pref.toyama.jp/kouminkan/info/svOrgDtl.aspx?orgcd=1799" target="_blank" class="class-card__map"><i class="fa-solid fa-map-location-dot"></i>マップ</a>
+      </div>
+
+      <!-- 黒部 -->
+      <div class="class-card">
+        <p class="class-card__name">黒部</p>
+        <div class="class-card__badges">
+          <span class="badge badge--day">土曜</span>
+        </div>
+        <div class="class-card__times">
+          <p class="class-card__time-row"><i class="fa-solid fa-clock"></i>10:00〜11:00 幼児</p>
+          <p class="class-card__time-row"><i class="fa-solid fa-clock"></i>11:00〜12:00 小学生</p>
+        </div>
+        <p class="class-card__place"><i class="fa-solid fa-location-dot"></i>黒部市（詳細はお問い合わせ）</p>
+        <a href="https://share.google/qtOamqFPDCHqJibpv" target="_blank" class="class-card__map"><i class="fa-solid fa-map-location-dot"></i>マップ</a>
+      </div>
+
+    </div><!-- /.class-grid -->
+
+
+    <!-- =============================================
+         LINE / Instagram バナー
+    ============================================= -->
+    <p class="sec-title">公式SNS・お問い合わせ</p>
+
+    <div class="sns-banners">
+      <!-- ===== LINEリンク（後から変更可） ===== -->
+      <a href="https://lin.ee/VoPXDMK" target="_blank" class="line-banner">
+        <div class="sns-banner__icon"><i class="fa-brands fa-line"></i></div>
+        <div>
+          <p class="sns-banner__label">公式LINE</p>
+          <p class="sns-banner__name">日時の詳細・ご質問<br />はこちらから</p>
+        </div>
+        <span class="sns-banner__btn">LINEを追加する <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+      </a>
+
+      <!-- ===== InstagramリンクのURL（後から変更可） ===== -->
+      <a href="https://www.instagram.com/possispo?igsh=MWZ4N2VqaDM1cnQyNw%3D%3D&utm_source=qr" target="_blank" class="insta-banner">
+        <div class="sns-banner__icon"><i class="fa-brands fa-instagram"></i></div>
+        <div>
+          <p class="sns-banner__label">Instagram</p>
+          <p class="sns-banner__name">教室の様子を<br />毎日更新中！</p>
+        </div>
+        <span class="sns-banner__btn">フォローする <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+      </a>
+    </div>
+
+    <!-- =============================================
+         LINE CTA
+    ============================================= -->
+    <p class="sec-title">無料体験のお申し込み方法</p>
+
+    <div class="line-cta-card">
+      <div class="line-cta-card__icon">
+        <i class="fa-brands fa-line"></i>
+      </div>
+      <h2 class="line-cta-card__title">LINEで簡単！3ステップで完了</h2>
+      <p class="line-cta-card__sub">フォーム入力不要。LINEだけで体験予約できます。</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">①</div>
+          <p class="step__text">公式LINEを<br />友だち追加</p>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="step">
+          <div class="step__num">②</div>
+          <p class="step__text">お名前と<br />希望クラスを送信</p>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="step">
+          <div class="step__num">③</div>
+          <p class="step__text">日程を<br />調整して完了！</p>
+        </div>
+      </div>
+
+      <a href="https://lin.ee/VoPXDMK" target="_blank" class="line-cta-btn">
+        <i class="fa-brands fa-line"></i> LINEで無料体験を申し込む
+      </a>
+      <p class="line-cta-note">無料・登録はLINEアプリから30秒で完了します</p>
+    </div>
+
+  </main>
+
+
+  <!-- フッター -->
+  <footer class="footer">
+    <p>© 2024 <span>かめちゃん運動教室</span>. All rights reserved.</p>
+  </footer>
+
+
+
+</body>
+</html>
