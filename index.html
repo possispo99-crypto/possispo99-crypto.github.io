@@ -1444,27 +1444,31 @@
 
     @media (max-width: 480px) { .locations__grid { grid-template-columns: 1fr; } }
   </style>
+  <!-- ===== 構造化データ: LocalBusiness ===== -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SportsActivityLocation",
+    "@type": ["LocalBusiness", "SportsActivityLocation"],
     "name": "かめちゃん運動教室",
-    "description": "滑川・魚津・黒部・朝日町の子ども向け運動教室。発達障がいのあるお子さんも歓迎。年少〜小6対象。チケット制。初回無料体験受付中。",
-    "url": "https://possi.jp/",
-    "telephone": "",
+    "description": "滑川・魚津・黒部・富山の子ども向け運動教室。運動が苦手な子が楽しみながら得意になる。発達障がいのあるお子さんも歓迎。年少〜小6対象。チケット制で通いやすい。初回無料体験受付中。",
+    "url": "https://kamechan-undo.jp/",
+    "telephone": "080-6356-6673",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "柳原238",
+      "addressLocality": "滑川市",
       "addressRegion": "富山県",
+      "postalCode": "936-0023",
       "addressCountry": "JP"
     },
     "areaServed": [
       {"@type": "City", "name": "滑川市"},
       {"@type": "City", "name": "魚津市"},
       {"@type": "City", "name": "黒部市"},
-      {"@type": "City", "name": "朝日町"}
+      {"@type": "City", "name": "富山市"},
+      {"@type": "AdministrativeArea", "name": "朝日町"}
     ],
     "priceRange": "¥3,000〜¥12,000（チケット制）",
-    "openingHours": "お問い合わせください",
     "offers": [
       {
         "@type": "Offer",
@@ -1475,14 +1479,87 @@
       },
       {
         "@type": "Offer",
-        "name": "2枚チケット",
+        "name": "チケット2枚",
         "price": "3000",
-        "priceCurrency": "JPY"
+        "priceCurrency": "JPY",
+        "description": "1回1,500円"
+      },
+      {
+        "@type": "Offer",
+        "name": "チケット5枚",
+        "price": "7000",
+        "priceCurrency": "JPY",
+        "description": "1回1,400円"
+      },
+      {
+        "@type": "Offer",
+        "name": "チケット10枚",
+        "price": "12000",
+        "priceCurrency": "JPY",
+        "description": "1回1,200円・一番お得"
       }
     ],
     "sameAs": [
       "https://www.instagram.com/possispo",
-      "https://lin.ee/VoPXDMK"
+      "https://lin.ee/LlJKtZb"
+    ]
+  }
+  </script>
+
+  <!-- ===== 構造化データ: FAQPage ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "運動が苦手でも大丈夫ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "大歓迎です！苦手な子こそ大歓迎です。楽しみながら自然と成長できる環境をご用意していますので、「運動は苦手…」というお子さんにこそ、ぜひ体験してほしい教室です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "発達障がいがあっても参加できますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "もちろん参加できます！一人ひとりの特性に合わせて丁寧に対応します。安心してご相談ください。事前にご連絡いただけると、より適切なサポートのご案内ができます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "足が速くなりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "必ず速くなると保証できるものではありませんが、継続して通うことで速くなることができる教室です。走る力の基礎となる身体操作・俊敏性・体幹をしっかり育てます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "有効期限の切れたチケットは使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "原則使用不可とさせていただいております。チケットの有効期限は購入から3ヶ月間です。期限内にぜひご活用ください。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "どんな運動能力が身につきますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "どんな運動にも対応することができる運動能力が身につきます。保育のプロの視点から、発達段階を考慮しながら運動遊びを行いますので、特定のスポーツに偏らないバランスの良い体づくりができます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "持ち物は何が必要ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "うちばきシューズと水筒、あれば着替えです。滑川の会場のみ裸足にて行いますので、うちばきシューズは不要です。"
+        }
+      }
     ]
   }
   </script>
