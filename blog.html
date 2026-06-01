@@ -480,58 +480,25 @@
     <div class="container">
       <div class="section-label"><i class="fa-solid fa-pen-to-square"></i> ARTICLES</div>
       <h2 class="section-title">ブログ記事一覧</h2>
-      <div class="blog-grid">
+      <p class="section-sub" style="text-align:center; color:var(--text-sub); margin-top:-16px; margin-bottom:8px;">
+        <a href="https://note.com/kamechanundo" target="_blank" rel="noopener" style="color:var(--orange); font-weight:700;">note</a> で更新中！記事を投稿すると自動でこちらに表示されます。
+      </p>
 
-        <div class="blog-card">
-          <div class="blog-card__thumb" style="background: linear-gradient(135deg, #FFF4EC, #FFD4B2);">
-            <i class="fa-solid fa-bullhorn" style="color:#FF6B1A;"></i>
-          </div>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__cat" style="background:#FF6B1A;">お知らせ</span>
-              <span class="blog-card__date">2026年4月</span>
-            </div>
-            <p class="blog-card__title">ホームページをリニューアルしました！</p>
-            <p class="blog-card__excerpt">この度、かめちゃん運動教室の公式ホームページをリニューアルしました。各教室の情報や料金、お申し込みフォームをわかりやすくまとめましたので、ぜひご覧ください。</p>
-            <a href="#" class="blog-card__link">続きを読む →</a>
-          </div>
+      <!-- note記事 自動読み込みエリア -->
+      <div id="note-articles" class="blog-grid">
+        <div style="grid-column:1/-1; text-align:center; padding:60px 0; color:var(--text-sub);">
+          <i class="fa-solid fa-spinner fa-spin" style="font-size:2rem; margin-bottom:16px; display:block;"></i>
+          記事を読み込み中...
         </div>
-
-        <div class="blog-card">
-          <div class="blog-card__thumb" style="background: linear-gradient(135deg, #EBF0FF, #C7D7FF);">
-            <i class="fa-solid fa-face-smile" style="color:#1A2456;"></i>
-          </div>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__cat" style="background:#1A2456;">教室日記</span>
-              <span class="blog-card__date">2026年3月</span>
-            </div>
-            <p class="blog-card__title">子どもたちの「できた！」瞬間が最高のご褒美</p>
-            <p class="blog-card__excerpt">先日の教室で、ずっと苦手だったでんぐり返しに挑戦したお子さんが、ついに一人でできるように！その時の満面の笑みは忘れられません。こういう瞬間があるから、この仕事を続けていられます。</p>
-            <a href="#" class="blog-card__link">続きを読む →</a>
-          </div>
-        </div>
-
-        <div class="blog-card">
-          <div class="blog-card__thumb" style="background: linear-gradient(135deg, #F0FDF4, #BBF7D0);">
-            <i class="fa-solid fa-cloud-rain" style="color:#22C55E;"></i>
-          </div>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__cat" style="background:#22C55E;">運動遊び</span>
-              <span class="blog-card__date">2026年2月</span>
-            </div>
-            <p class="blog-card__title">室内でできる！雨の日の運動遊び5選</p>
-            <p class="blog-card__excerpt">梅雨や雪の日でも体を動かしたい！今回は、家の中や狭いスペースでもできる運動遊びを5つご紹介します。準備不要で、すぐに始められるものばかりです。</p>
-            <a href="#" class="blog-card__link">続きを読む →</a>
-          </div>
-        </div>
-
       </div>
 
       <div class="blog-info-box">
-        <p>記事は随時更新中です。最新情報はInstagramやLINE公式アカウントもご確認ください。</p>
+        <p>記事はnoteで随時更新中！Instagramや LINE公式アカウントもぜひフォローしてください。</p>
         <div class="btn-row">
+          <a href="https://note.com/kamechanundo" target="_blank" rel="noopener"
+            style="display:inline-flex; align-items:center; gap:8px; background:#41C9B4; color:white; padding:10px 20px; border-radius:99px; font-weight:700; font-size:.9rem; text-decoration:none;">
+            <i class="fa-solid fa-pen-to-square"></i> note
+          </a>
           <a href="https://www.instagram.com/possispo" target="_blank" rel="noopener"
             style="display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:white; padding:10px 20px; border-radius:99px; font-weight:700; font-size:.9rem; text-decoration:none;">
             <i class="fa-brands fa-instagram"></i> Instagram
@@ -544,6 +511,88 @@
       </div>
     </div>
   </section>
+
+  <!-- note RSS 自動連携スクリプト -->
+  <script>
+  (function() {
+    const NOTE_USER = 'kamechanundo';
+    const RSS_API   = 'https://api.rss2json.com/v1/api.json?rss_url=' +
+                      encodeURIComponent('https://note.com/' + NOTE_USER + '/rss') +
+                      '&api_key=&count=6';
+    const container = document.getElementById('note-articles');
+
+    const THUMB_COLORS = [
+      ['#FFF4EC','#FFD4B2','#FF6B1A'],
+      ['#EBF0FF','#C7D7FF','#1A2456'],
+      ['#F0FDF4','#BBF7D0','#22C55E'],
+      ['#FFF8E1','#FFE082','#F59E0B'],
+      ['#FCE4EC','#F48FB1','#E91E63'],
+      ['#E8F5E9','#A5D6A7','#388E3C'],
+    ];
+    const ICONS = [
+      'fa-solid fa-pen-to-square',
+      'fa-solid fa-face-smile',
+      'fa-solid fa-running',
+      'fa-solid fa-star',
+      'fa-solid fa-heart',
+      'fa-solid fa-bolt',
+    ];
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.getFullYear() + '年' + (d.getMonth()+1) + '月' + d.getDate() + '日';
+    }
+
+    function stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    function renderCards(items) {
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:60px 0; color:var(--text-sub);">' +
+          '<i class="fa-solid fa-pen-to-square" style="font-size:2rem; margin-bottom:16px; display:block; opacity:.3;"></i>' +
+          'まだ記事がありません。<br>noteで記事を投稿すると自動で表示されます！</div>';
+        return;
+      }
+      container.innerHTML = items.map(function(item, i) {
+        const c = THUMB_COLORS[i % THUMB_COLORS.length];
+        const icon = ICONS[i % ICONS.length];
+        const thumb = item.thumbnail
+          ? '<img src="' + item.thumbnail + '" alt="" style="width:100%;height:100%;object-fit:cover;">'
+          : '<i class="' + icon + '" style="color:' + c[2] + ';font-size:2.5rem;"></i>';
+        const bg = item.thumbnail ? '' : 'background:linear-gradient(135deg,' + c[0] + ',' + c[1] + ');';
+        const excerpt = stripHtml(item.description).replace(/\n/g,' ').substring(0, 80) + '…';
+        return '<div class="blog-card reveal">' +
+          '<div class="blog-card__thumb" style="' + bg + '">' + thumb + '</div>' +
+          '<div class="blog-card__body">' +
+            '<div class="blog-card__meta">' +
+              '<span class="blog-card__cat" style="background:var(--orange);">note</span>' +
+              '<span class="blog-card__date">' + formatDate(item.pubDate) + '</span>' +
+            '</div>' +
+            '<p class="blog-card__title">' + item.title + '</p>' +
+            '<p class="blog-card__excerpt">' + excerpt + '</p>' +
+            '<a href="' + item.link + '" target="_blank" rel="noopener" class="blog-card__link">続きを読む →</a>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    fetch(RSS_API)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.status === 'ok') {
+          renderCards(data.items);
+        } else {
+          renderCards([]);
+        }
+      })
+      .catch(function() {
+        renderCards([]);
+      });
+  })();
+  </script>
 
 
   <!-- FOOTER -->
