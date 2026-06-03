@@ -517,7 +517,8 @@
   (function() {
     const NOTE_USER = 'kamechanundo';
     const RSS_API   = 'https://api.rss2json.com/v1/api.json?rss_url=' +
-                      encodeURIComponent('https://note.com/' + NOTE_USER + '/rss');
+                      encodeURIComponent('https://note.com/' + NOTE_USER + '/rss') +
+                      '&_=' + Date.now();
     const container = document.getElementById('note-articles');
 
     const THUMB_COLORS = [
