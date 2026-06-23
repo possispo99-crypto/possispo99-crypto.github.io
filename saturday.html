@@ -55,6 +55,8 @@
     .info-row .k{font-size:.78rem;color:var(--text-sub);margin-bottom:2px;}
     .info-row .v{font-weight:700;font-size:1.05rem;}
     .todo{background:#FFF7D6;color:#9A6B00;font-weight:700;padding:2px 8px;border-radius:6px;font-size:.85rem;}
+    .notice{margin-top:16px;background:#FFF7D6;color:#7A5400;border-radius:12px;padding:14px 18px;font-size:.9rem;line-height:1.7;}
+    .notice i{color:var(--orange);margin-right:6px;}
 
     .price{background:var(--orange-bg);border-radius:var(--radius-lg);padding:28px 24px;text-align:center;}
     .price__main{font-size:1rem;color:var(--text-sub);margin-bottom:6px;}
@@ -73,7 +75,9 @@
     .cta{background:linear-gradient(160deg,var(--orange),var(--orange-lt));color:#fff;text-align:center;padding:48px 20px;}
     .cta h2{font-size:1.5rem;font-weight:900;margin-bottom:10px;}
     .cta p{margin-bottom:24px;font-size:.95rem;}
-    .cta__btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--line);font-weight:900;font-size:1.05rem;padding:16px 34px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.18);}
+    .cta__btns{display:flex;flex-direction:column;gap:12px;max-width:340px;margin:0 auto;}
+    .cta__btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:var(--line);font-weight:900;font-size:1.05rem;padding:16px 24px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.18);}
+    .cta__btn--sub{background:transparent;color:#fff;border:2px solid #fff;box-shadow:none;}
     .cta__note{margin-top:16px;font-size:.82rem;color:#FFE6D2;}
 
     footer{background:var(--navy);color:#B9C2E0;text-align:center;padding:28px 20px;font-size:.82rem;}
@@ -102,9 +106,10 @@
       <div class="info-card">
         <div class="info-row"><i class="fa-solid fa-calendar-day"></i><div><div class="k">曜日</div><div class="v">毎週 土曜日</div></div></div>
         <div class="info-row"><i class="fa-solid fa-clock"></i><div><div class="k">時間</div><div class="v">幼児 13:00〜14:00<br>小学生 14:00〜15:00</div></div></div>
-        <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><div class="k">会場</div><div class="v">滑川市総合体育館</div></div></div>
+        <div class="info-row"><i class="fa-solid fa-location-dot"></i><div><div class="k">会場</div><div class="v">滑川市総合体育館（予定）</div></div></div>
         <div class="info-row"><i class="fa-solid fa-child-reaching"></i><div><div class="k">対象</div><div class="v">幼児・小学生</div></div></div>
       </div>
+      <p class="notice"><i class="fa-solid fa-bullhorn"></i> 会場・開催日の詳細は、<strong>月末にLINEでご案内</strong>します。まずはお気軽にお問い合わせください。</p>
     </div>
   </section>
 
@@ -137,10 +142,13 @@
   </section>
 
   <section class="cta">
-    <h2>まずは無料体験から！</h2>
-    <p>「うちの子に合うかな？」は、来てみればわかります。<br>合わなければ、それでOK。お気軽にどうぞ😊</p>
-    <a href="https://lin.ee/WT9hGvN" class="cta__btn"><i class="fa-brands fa-line"></i> LINEで体験を申し込む</a>
-    <p class="cta__note">「土曜クラス体験希望」と送るだけ。電話もメールも不要です。</p>
+    <h2>気になったら、まずはタップ！</h2>
+    <p>無料体験のお申し込みも、<br>ちょっとした質問だけでも大歓迎です😊</p>
+    <div class="cta__btns">
+      <a href="https://lin.ee/WT9hGvN" class="cta__btn"><i class="fa-brands fa-line"></i> 体験・入会を希望する</a>
+      <a href="https://lin.ee/WT9hGvN" class="cta__btn cta__btn--sub"><i class="fa-regular fa-comment-dots"></i> まずは質問・相談する</a>
+    </div>
+    <p class="cta__note">タップするとLINEが開きます。電話もメールも不要です。</p>
   </section>
 
   <footer>
