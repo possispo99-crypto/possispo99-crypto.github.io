@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お休み・振替のご連絡｜かめちゃん運動教室（滑川 土曜クラス）</title>
+  <meta name="robots" content="noindex" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    :root{
+      --orange:#FF6B1A; --orange-lt:#FF8C42; --orange-bg:#FFF4EC;
+      --navy:#1A2456; --text:#1A2456; --text-sub:#5A6A8A;
+      --border:#E8EBF4; --bg:#F7F8FC;
+      --radius:16px;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Noto Sans JP',sans-serif;color:var(--text);background:var(--bg);line-height:1.8;}
+    .container{max-width:520px;margin:0 auto;padding:0 20px 60px;}
+
+    .hero{background:linear-gradient(160deg,var(--navy),#2D3A7C);color:#fff;text-align:center;padding:36px 20px;}
+    .hero h1{font-size:1.3rem;font-weight:900;}
+    .hero p{font-size:.88rem;color:#D9DEF0;margin-top:4px;}
+
+    .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 32px rgba(26,36,86,.10);padding:26px 22px;margin-top:24px;}
+    label{display:block;font-weight:900;font-size:.95rem;margin:18px 0 6px;}
+    label:first-child{margin-top:0;}
+    label .req{color:var(--orange);font-size:.75rem;margin-left:6px;}
+    input[type=text],input[type=date],textarea,select{
+      width:100%;padding:13px 14px;border:2px solid var(--border);border-radius:12px;
+      font-size:1rem;font-family:inherit;background:#fff;color:var(--text);
+    }
+    input:focus,textarea:focus,select:focus{outline:none;border-color:var(--orange);}
+    textarea{min-height:80px;resize:vertical;}
+
+    .radio-group{display:grid;gap:10px;}
+    .radio-item{display:flex;align-items:center;gap:10px;border:2px solid var(--border);border-radius:12px;padding:13px 14px;cursor:pointer;background:#fff;font-size:.92rem;}
+    .radio-item input{accent-color:var(--orange);width:18px;height:18px;flex-shrink:0;}
+    .radio-item.selected{border-color:var(--orange);background:var(--orange-bg);}
+
+    .btn{display:block;width:100%;margin-top:26px;background:linear-gradient(160deg,var(--orange),var(--orange-lt));color:#fff;
+      font-weight:900;font-size:1.05rem;padding:16px;border:none;border-radius:99px;cursor:pointer;font-family:inherit;
+      box-shadow:0 6px 20px rgba(255,107,26,.35);}
+    .btn:disabled{opacity:.6;}
+
+    .note{margin-top:20px;background:#FFF7D6;color:#7A5400;border-radius:12px;padding:14px 16px;font-size:.85rem;line-height:1.7;}
+    .note i{color:var(--orange);margin-right:6px;}
+
+    .done{display:none;text-align:center;padding:40px 10px;}
+    .done .emoji{font-size:3rem;}
+    .done h2{font-size:1.3rem;font-weight:900;color:var(--navy);margin:10px 0 8px;}
+    .done p{font-size:.92rem;color:var(--text-sub);}
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <h1>🐢 お休み・振替のご連絡</h1>
+    <p>かめちゃん運動教室｜滑川 土曜クラス</p>
+  </section>
+
+  <div class="container">
+    <div class="card" id="formCard">
+      <form id="oyasumiForm">
+        <label>お子さんのお名前<span class="req">必須</span></label>
+        <input type="text" name="name" placeholder="例：かめだ たろう" required />
+
+        <label>お休みする日<span class="req">必須</span></label>
+        <input type="date" name="date" required />
+
+        <label>振替のご希望<span class="req">必須</span></label>
+        <div class="radio-group" id="radioGroup">
+          <label class="radio-item"><input type="radio" name="furikae" value="別の土曜（ボーナス回）で振替したい" required />別の土曜（ボーナス回）で振替したい</label>
+          <label class="radio-item"><input type="radio" name="furikae" value="他クラス（滑川金曜・魚津水曜・黒部土曜）で振替したい" />他クラス（滑川金曜・魚津水曜・黒部土曜）で振替したい</label>
+          <label class="radio-item"><input type="radio" name="furikae" value="あとで相談する" />あとで相談する</label>
+        </div>
+
+        <label>ひとことメモ（任意）</label>
+        <textarea name="memo" placeholder="例：発熱のためお休みします"></textarea>
+
+        <button type="submit" class="btn" id="sendBtn"><i class="fa-solid fa-paper-plane"></i> 送信する</button>
+      </form>
+
+      <p class="note"><i class="fa-solid fa-circle-info"></i>
+        振替は <strong>お休みから1ヶ月以内のボーナス回（月4回目）</strong>、または他クラスでご参加いただけます。振替日のご案内は、改めてLINEでお送りします😊
+      </p>
+    </div>
+
+    <div class="done card" id="doneCard">
+      <div class="emoji">🐢</div>
+      <h2>ご連絡ありがとうございます！</h2>
+      <p>お休みのご連絡を受け付けました。<br>振替のご案内は、改めてLINEでお送りしますね。<br>また教室でお待ちしています😊</p>
+    </div>
+  </div>
+
+  <iframe name="hidden_iframe" style="display:none"></iframe>
+
+  <script>
+    var FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSeUkXaUdMn3_34GzhbSCIgXf2pwt-6_zm4jkYfhj_t6jsMkAw/formResponse';
+
+    // ラジオの見た目
+    document.querySelectorAll('.radio-item input').forEach(function(r){
+      r.addEventListener('change', function(){
+        document.querySelectorAll('.radio-item').forEach(function(el){ el.classList.remove('selected'); });
+        r.closest('.radio-item').classList.add('selected');
+      });
+    });
+
+    document.getElementById('oyasumiForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var f = e.target;
+      var d = f.date.value.split('-'); // YYYY-MM-DD
+
+      var gform = document.createElement('form');
+      gform.action = FORM_ACTION;
+      gform.method = 'POST';
+      gform.target = 'hidden_iframe';
+      gform.style.display = 'none';
+
+      function add(n, v){
+        var i = document.createElement('input');
+        i.name = n; i.value = v;
+        gform.appendChild(i);
+      }
+      add('entry.706581504', f.name.value);
+      add('entry.1305819177_year', d[0]);
+      add('entry.1305819177_month', String(parseInt(d[1],10)));
+      add('entry.1305819177_day', String(parseInt(d[2],10)));
+      add('entry.1844623230', f.furikae.value);
+      add('entry.2066423529', f.memo.value);
+
+      document.body.appendChild(gform);
+      document.getElementById('sendBtn').disabled = true;
+      gform.submit();
+
+      setTimeout(function(){
+        document.getElementById('formCard').style.display = 'none';
+        document.getElementById('doneCard').style.display = 'block';
+        window.scrollTo(0,0);
+      }, 800);
+    });
+  </script>
+
+</body>
+</html>
