@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>土曜クラス 振替のご案内｜かめちゃん運動教室</title>
+  <meta name="description" content="かめちゃん運動教室・土曜クラス（滑川・月謝制）の振替のご案内。お休みした分は金曜・滑川／水曜・魚津／土曜・黒部で振替できます。追加料金はかかりません。" />
+  <link rel="canonical" href="https://kamechan-undo.jp/furikae.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    :root{
+      --orange:#FF6B1A; --orange-lt:#FF8C42; --orange-bg:#FFF4EC;
+      --navy:#1A2456; --text:#1A2456; --text-sub:#5A6A8A;
+      --border:#E8EBF4; --white:#FFFFFF; --bg:#F7F8FC;
+      --line:#06C755;
+      --radius:16px; --radius-lg:24px;
+      --shadow:0 8px 32px rgba(26,36,86,.12);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Noto Sans JP',sans-serif;color:var(--text);background:var(--white);line-height:1.8;}
+    img{max-width:100%;height:auto;display:block;}
+    a{color:inherit;text-decoration:none;}
+    .container{max-width:680px;margin:0 auto;padding:0 20px;}
+
+    .header{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+    .header__inner{display:flex;align-items:center;justify-content:space-between;height:60px;}
+    .logo{display:flex;align-items:center;gap:8px;font-weight:900;color:var(--navy);font-size:1.05rem;}
+    .logo__icon{width:34px;height:34px;background:var(--orange);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;}
+    .logo span{color:var(--orange);}
+    .btn-line{display:inline-flex;align-items:center;gap:7px;background:var(--line);color:#fff;font-weight:700;padding:9px 16px;border-radius:99px;font-size:.85rem;white-space:nowrap;}
+
+    .hero{background:linear-gradient(160deg,var(--navy),#2D3A7C);color:#fff;text-align:center;padding:54px 20px 60px;position:relative;overflow:hidden;}
+    .hero__badge{display:inline-block;background:var(--orange);color:#fff;font-weight:700;font-size:.85rem;padding:6px 18px;border-radius:99px;margin-bottom:18px;}
+    .hero h1{font-size:2rem;font-weight:900;line-height:1.4;margin-bottom:14px;}
+    .hero h1 em{color:#FFD56B;font-style:normal;}
+    .hero p{font-size:1rem;color:#D9DEF0;}
+
+    section{padding:44px 0;}
+    .section--bg{background:var(--bg);}
+    .label{display:inline-block;color:var(--orange);font-weight:700;font-size:.8rem;letter-spacing:.08em;margin-bottom:8px;}
+    .title{font-size:1.4rem;font-weight:900;color:var(--navy);margin-bottom:24px;line-height:1.5;}
+    .center{text-align:center;}
+
+    .lead{background:var(--orange-bg);border-radius:var(--radius);padding:20px 22px;font-size:.95rem;color:#8A4A1E;}
+    .lead b{color:var(--orange);}
+
+    .info-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:8px 24px;}
+    .info-row{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px dashed var(--border);}
+    .info-row:last-child{border-bottom:none;}
+    .info-row i{width:38px;height:38px;flex-shrink:0;background:var(--orange-bg);color:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-top:2px;}
+    .info-row .k{font-size:.78rem;color:var(--text-sub);margin-bottom:2px;}
+    .info-row .v{font-weight:700;font-size:1rem;line-height:1.7;}
+    .info-row .v small{font-weight:400;color:var(--text-sub);}
+
+    .notice{margin-top:16px;background:#FFF7D6;color:#7A5400;border-radius:12px;padding:14px 18px;font-size:.9rem;line-height:1.8;}
+    .notice b{color:#B5590A;}
+    .notice .h{font-weight:900;color:#B5590A;display:block;margin-bottom:4px;}
+
+    /* steps */
+    .steps{display:grid;gap:14px;}
+    .step{display:flex;gap:14px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);}
+    .step__n{width:34px;height:34px;flex-shrink:0;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Poppins',sans-serif;}
+    .step h3{font-size:1.02rem;font-weight:900;color:var(--navy);margin-bottom:2px;}
+    .step p{font-size:.88rem;color:var(--text-sub);}
+
+    /* table */
+    .tbl{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:.9rem;box-shadow:var(--shadow);}
+    .tbl th{background:var(--navy);color:#fff;padding:11px 10px;text-align:left;font-size:.82rem;}
+    .tbl td{padding:12px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+    .tbl tr:last-child td{border-bottom:none;}
+    .tbl .cls{font-weight:900;color:var(--navy);white-space:nowrap;}
+    .tbl .bare{color:var(--orange);font-weight:700;}
+    .maplink{color:var(--orange);font-weight:700;display:inline-flex;align-items:flex-start;gap:5px;text-decoration:underline;text-underline-offset:2px;}
+    .maplink i{margin-top:4px;font-size:.85em;}
+
+    /* cta */
+    .cta{background:linear-gradient(160deg,var(--orange),var(--orange-lt));color:#fff;text-align:center;padding:48px 20px;}
+    .cta h2{font-size:1.4rem;font-weight:900;margin-bottom:8px;}
+    .cta p{margin-bottom:24px;font-size:.92rem;}
+    .cta__btns{display:flex;flex-direction:column;gap:12px;max-width:360px;margin:0 auto;}
+    .cta__btn{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;color:var(--orange);font-weight:900;font-size:1.05rem;padding:15px 24px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.18);}
+    .cta__btn small{font-weight:600;font-size:.72rem;color:var(--text-sub);margin-top:2px;}
+    .cta__btn--sub{background:transparent;color:#fff;border:2px solid #fff;box-shadow:none;}
+    .cta__btn--sub small{color:#FFE6D2;}
+    .cta__note{margin-top:16px;font-size:.82rem;color:#FFE6D2;}
+
+    /* faq */
+    details{background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;}
+    summary{padding:16px 46px 16px 18px;font-size:.95rem;font-weight:700;color:var(--navy);cursor:pointer;list-style:none;position:relative;}
+    summary::-webkit-details-marker{display:none;}
+    summary::after{content:"\002B";position:absolute;right:18px;top:13px;font-size:1.3rem;color:var(--orange);font-weight:900;}
+    details[open] summary::after{content:"\2212";}
+    details .a{padding:0 18px 16px;font-size:.88rem;color:var(--text-sub);}
+
+    /* leave */
+    .leave{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:22px 24px;}
+    .leave h3{font-size:1.05rem;color:var(--navy);font-weight:900;line-height:1.6;}
+    .leave .ex{background:var(--orange-bg);border-radius:12px;padding:11px 14px;font-size:.9rem;color:#8A4A1E;margin:12px 0;}
+    .leave .ex b{color:var(--orange);}
+    .leave .warn{font-size:.82rem;color:var(--text-sub);}
+
+    footer{background:var(--navy);color:#B9C2E0;text-align:center;padding:34px 20px;font-size:.82rem;}
+    footer .fn{color:#fff;font-weight:900;font-size:1.05rem;margin-bottom:12px;}
+    footer .contact a{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:900;font-size:1rem;background:rgba(255,255,255,.12);padding:10px 20px;border-radius:99px;margin:5px;}
+    footer .fnote{margin-top:16px;color:#8E99C4;font-size:.78rem;}
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="https://kamechan-undo.jp/" class="logo"><span class="logo__icon"><i class="fa-solid fa-person-running"></i></span>かめちゃん<span>運動教室</span></a>
+      <!-- ▼ LINE友だちURL（例: https://lin.ee/WT9hGvN） ▼ -->
+      <a href="https://lin.ee/WT9hGvN" class="btn-line"><i class="fa-brands fa-line"></i> 相談する</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="hero__badge"><i class="fa-solid fa-rotate"></i> 土曜クラス</span>
+    <h1>振替の<em>ご案内</em></h1>
+    <p>お休みした分は、他クラスで振替できます🐢</p>
+  </section>
+
+  <!-- 対象・かんたんルール -->
+  <section>
+    <div class="container">
+      <div class="lead">
+        このページは <b>土曜・滑川クラス（月謝制）</b> にお通いのお子さま向けです。<br>
+        お休みされた回は <b>金曜・滑川／水曜・魚津／土曜・黒部</b> のいずれかで振替いただけます（<b>追加料金はかかりません</b>）。
+      </div>
+    </div>
+  </section>
+
+  <!-- 3ステップ -->
+  <section class="section--bg">
+    <div class="container">
+      <span class="label">HOW TO</span>
+      <h2 class="title">かんたん3ステップ</h2>
+      <div class="steps">
+        <div class="step"><span class="step__n">1</span><div><h3>お休みの連絡をする</h3><p>下のフォームから、休む日と振替の希望を送信</p></div></div>
+        <div class="step"><span class="step__n">2</span><div><h3>振替先のクラスを選ぶ</h3><p>「月間スケジュール」で行ける日を確認</p></div></div>
+        <div class="step"><span class="step__n">3</span><div><h3>その日に参加する</h3><p>選んだクラスに来てね！</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA（大ボタン） -->
+  <section class="cta">
+    <h2>お休み・振替の連絡</h2>
+    <p>当日でもOK！下のボタンから、かんたんに手続きできます</p>
+    <div class="cta__btns">
+      <a class="cta__btn" href="https://forms.gle/ftZnmSeJSdtBJTGL8" target="_blank" rel="noopener"><span><i class="fa-solid fa-pen-to-square"></i> お休み・振替を連絡する</span><small>フォームを送ったら一言LINEもください</small></a>
+      <!-- ▼▼ 月間スケジュール＝Googleフォト共有アルバム（毎月このアルバム内の画像だけ差し替え／URLは固定） ▼▼ -->
+      <a class="cta__btn cta__btn--sub" href="https://photos.app.goo.gl/TXrxndiS8xZJJ7ZBA" target="_blank" rel="noopener"><span><i class="fa-solid fa-calendar-days"></i> 月間スケジュールを見る</span><small>振替先の開催日を確認できます</small></a>
+    </div>
+    <p class="cta__note">※お休みの連絡は当日でも大丈夫です（見逃し防止に一言LINEをお願いします）</p>
+  </section>
+
+  <!-- 振替先クラス早見表 -->
+  <section>
+    <div class="container">
+      <span class="label">CLASS</span>
+      <h2 class="title">振替先クラス 早見表</h2>
+      <table class="tbl">
+        <tr><th>クラス</th><th>時間</th><th>会場・持ち物</th></tr>
+        <tr>
+          <td class="cls">金曜・滑川</td>
+          <td>幼児 18:00〜<br>小学生 19:00〜</td>
+          <td><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%BB%91%E5%B7%9D%E5%B8%82%E7%B7%8F%E5%90%88%E4%BD%93%E8%82%B2%E9%A4%A8" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i>滑川市総合体育館 柔道場</a><br><span class="bare">※裸足で実施</span></td>
+        </tr>
+        <tr>
+          <td class="cls">水曜・魚津</td>
+          <td>幼児 18:00〜<br>小学生 19:00〜</td>
+          <td><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E7%94%BA%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%20%E9%AD%9A%E6%B4%A5%E5%B8%82" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i>大町コミュニティセンター2階</a><br>※うわばきが必要</td>
+        </tr>
+        <tr>
+          <td class="cls">土曜・黒部</td>
+          <td>幼児 10:00〜<br>小学生 11:00〜</td>
+          <td><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BB%92%E9%83%A8%E5%8B%A4%E5%8A%B4%E9%9D%92%E5%B0%91%E5%B9%B4%E3%83%9B%E3%83%BC%E3%83%A0" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i>黒部勤労青少年ホーム</a><br>※うわばきが必要</td>
+        </tr>
+      </table>
+      <div class="notice">
+        <span class="h"><i class="fa-solid fa-triangle-exclamation"></i> ご注意ください</span>
+        ・<b>持ち物が変わります</b>：滑川は<b>裸足</b>／魚津・黒部は<b>うわばき</b>が必要です<br>
+        ・<b>時間帯が変わります</b>：金曜・水曜は<b>平日の夜</b>、黒部は<b>土曜の午前</b>です<br>
+        ・<b>会場名をタップ</b>すると地図（Googleマップ）が開きます
+      </div>
+    </div>
+  </section>
+
+  <!-- 振替のルール -->
+  <section class="section--bg">
+    <div class="container">
+      <span class="label">RULE</span>
+      <h2 class="title">振替のルール</h2>
+      <div class="info-card">
+        <div class="info-row"><i class="fa-solid fa-calendar-check"></i><div class="v">翌月末まで<br><small>休んだ月の翌月末までに振替してください（例：8月に休み → 9月末まで）。期限を過ぎた分は繰り越しできず消滅します。</small></div></div>
+        <div class="info-row"><i class="fa-solid fa-infinity"></i><div class="v">回数に上限なし<br><small>お休みされた回数分、何回でも振替いただけます。</small></div></div>
+        <div class="info-row"><i class="fa-solid fa-yen-sign"></i><div class="v">追加料金なし<br><small>他のクラスで振替しても、料金はかかりません（月謝に含まれます）。</small></div></div>
+        <div class="info-row"><i class="fa-solid fa-comment-dots"></i><div class="v">連絡は当日でもOK<br><small>フォーム入力後に、一言ご連絡をお願いします。予約後に行けなくなった場合も、あらためてご連絡ください。</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <span class="label">FAQ</span>
+      <h2 class="title">よくある質問</h2>
+      <details><summary>振替は何回までできますか？</summary><div class="a">上限はありません。お休みされた回数分、翌月末までに振替いただけます。</div></details>
+      <details><summary>いつまでに振替すればいいですか？</summary><div class="a">お休みした月の翌月末までです（例：8月に休んだ分は9月末まで）。過ぎると振替できなくなりますのでお早めに。</div></details>
+      <details><summary>他のクラスに行くと追加でお金がかかりますか？</summary><div class="a">かかりません。振替は月謝に含まれていますので、追加料金なしでご参加いただけます。</div></details>
+      <details><summary>持ち物は同じですか？</summary><div class="a">クラスによって変わります。滑川は裸足、魚津・黒部はうわばきが必要です。ご注意ください。</div></details>
+      <details><summary>予約した振替日に行けなくなったら？</summary><div class="a">問題ありません。もう一度フォームまたはLINEでご連絡ください。</div></details>
+    </div>
+  </section>
+
+  <!-- 退会について -->
+  <section class="section--bg">
+    <div class="container">
+      <span class="label">CANCEL</span>
+      <h2 class="title">退会について</h2>
+      <div class="leave">
+        <h3>退会をご希望の際は、退会される月末の2週間前までにご連絡ください。</h3>
+        <div class="ex">例：<b>8月末で退会</b> → <b>8月15日ごろまで</b>にご連絡</div>
+        <p class="warn">※月謝制のため、ご連絡が遅れると翌月分の月謝が発生する場合があります。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fn">ご不明な点はお気軽に🐢</div>
+    <div class="contact">
+      <a href="tel:08063566673"><i class="fa-solid fa-phone"></i> 080-6356-6673</a>
+      <!-- ▼ LINE友だちURL ▼ -->
+      <a href="https://lin.ee/WT9hGvN"><i class="fa-brands fa-line"></i> LINEで相談</a>
+    </div>
+    <div class="fnote">かめちゃん運動教室｜滑川市・魚津市・黒部市</div>
+  </footer>
+
+</body>
+</html>
